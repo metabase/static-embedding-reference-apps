@@ -6,11 +6,16 @@ const jwt = require("jsonwebtoken");
 const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
 
 // these should match the settings in your Metabase instance
-const MB_SITE_URL = process.env["MB_SITE_URL"] || "http://localhost:3000";
-const MB_EMBEDDING_SECRET_KEY = process.env["MB_EMBEDDING_SECRET_KEY"];
+var MB_SITE_URL = "http://localhost:3000";
+var MB_EMBEDDING_SECRET_KEY = "230e14ec089b2d22dd984dcd057b14df93e91f814f6f2526f2d10336ea40bf26";
+
+var payload = {
+  resource: { dashboard: 1 },
+  params: {}
+};
 
 // the dashboard ID of a dashboard that has a `user_id` parameter
-const DASHBOARD_ID = parseInt(process.env["DASHBOARD_ID"]);
+const DASHBOARD_ID = 1;
 
 if (!MB_EMBEDDING_SECRET_KEY) {
   throw new Error("Please set MB_EMBEDDING_SECRET_KEY.");
