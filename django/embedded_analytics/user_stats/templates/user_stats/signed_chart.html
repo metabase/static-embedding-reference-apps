@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+
+
+{% block content %}
+<hr>
+<h1>Embedding charts with signed parameters</h1>
+<p>
+	This is an example of an embedded chart with a signed parameter. Signed parameters are question parameters that must be signed by the embedding application. 
+</p>
+<p>
+	The parameter is "User ID". This parameter marked as "Locked". This means that the embedding application's server process must specify a value and sign the request. This prevents an end user of the application from changing the url and seeing other user's charts or dashboards. There is no reference to this ID in the embedded iframe, and it is kept a secret from the end user. 
+</p>
+<a href="/">Go back to a global view</a>
+<hr>
+
+<h1>Orders for User: {{user_id}}</h1>
+<iframe
+    src="http://{{iframeUrl}}"
+    frameborder="0"
+    width="800"
+    height="600"
+    allowtransparency
+/>
+{% endblock %}
+

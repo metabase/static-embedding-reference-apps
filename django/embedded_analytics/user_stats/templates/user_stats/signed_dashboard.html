@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<hr>
+<h1>Embedding dashboards with signed parameters</h1>
+<p>
+	This is an example of an embedded dashboard with signed parameters. Signed parameters are dashboard parameters that must be signed by the embedding application. This lets you do things like provide per-user dashboards. 
+</p>
+<p>
+	In this example, the user stats dashboard has two parameters. The first, "Category" is marked as "editable" in the embedding settings for the "User Stats". This means the widget is displayed in the dashboard below and the end user of you application can interact with that widget.
+</p>
+<p>
+	The second parameter is "User ID". This parameter marked as "Locked". This means that the embedding application's server process must specify a value and sign the request. This prevents an end user of the application from changing the url and seeing other user's charts or dashboards. There is no reference to this ID in the embedded iframe, and it is kept a secret from the end user. 
+</p>
+<a href="/">Go back to a global view</a>
+<hr>
+
+<h1>Stats for User: {{user_id}}</h1>
+<iframe src="http://{{iframeUrl}}" width="1200" height="800" frameborder="0" />
+
+{% endblock %}
+
+
