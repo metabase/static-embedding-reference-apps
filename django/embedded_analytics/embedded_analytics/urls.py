@@ -21,3 +21,10 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^', include('user_stats.urls'))
 ]
+
+from django.conf import settings
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
