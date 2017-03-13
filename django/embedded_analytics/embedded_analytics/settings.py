@@ -26,6 +26,7 @@ SECRET_KEY = '(0(6z_!au@sd37#ll25)37m@nm_2&)g6!n4_gs_i=9#)u9nh&w'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+INTERNAL_IPS = ['127.0.0.1']
 
 
 # Application definition
@@ -38,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'user_stats',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'user_stats'
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'embedded_analytics.urls'
