@@ -2,7 +2,7 @@
  
 {% block content %}
     <article>
-        <p>By embedding Metabase, you can use Metabase charts and Dashboards that any user can look at. You have two choices depending on the degree of security you need in your application.</p>
+        <p>By embedding Metabase, you can use Metabase charts and Dashboards within your application. You have two choices depending on the degree of security you need in your application.</p>
 
         <nav>
             <a href="#public">Public embeds</a>
@@ -18,7 +18,7 @@
             </p>
 
             <iframe
-                                                                                                                             src="http://localhost:3000/public/dashboard/be1e6baa-9b97-4534-8ac0-4a45b5bbf4e1"
+			   src="http://localhost:3000/public/dashboard/be1e6baa-9b97-4534-8ac0-4a45b5bbf4e1"
                frameborder="0"
                width="800"
                height="600"
@@ -54,8 +54,7 @@
             <p>
                 We can also embed signed dashboards that are not limited to a single user. The below is a dashboard that can only be displayed if the embedding application signs the url with our secret key and can only be used in that application. 
             </p>
-            <h2>All Orders</h2>
-            <iframe src="http://{{iframeUrl}}" width="1200" height="800" frameborder="0"></iframe>
+            <a href="/signed_public_dashboard">An example of a public signed dashboard</a>
         </section>
     </article>
 {% endblock %}
