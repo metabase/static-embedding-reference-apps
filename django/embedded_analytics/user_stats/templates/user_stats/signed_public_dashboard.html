@@ -1,0 +1,55 @@
+{% extends "user_stats/base.html" %}
+
+
+{% block content %}
+<hr>
+<h1>Signed dashboards without parameters</h1>
+<p>
+	This is an example of a signed embedded dashboard. We haven't signed any parameters, but we have signed the resource id (in this case dashboard 1). This is means that only application with the signing key are allowed to embed a Metabase resource (vs the public link which can be copy/pasted and shared). Signed embeds can also be set to have an expiration time, which further improves security.
+</p>
+<p>
+	To embed this dasbhoard in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and it's signed parameters as below
+</p>
+<pre>
+    payload = {
+        "resource": {"dashboard": 1},
+        "params": {
+        }
+    }
+
+    token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
+
+    iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token + "#bordered=true"
+</pre>
+<p>
+	In the place you wish to embed the chart in your HTML, insert the below:	
+</p>
+
+<pre>
+<code>
+	
+
+&lt;iframe
+    src="http://{% templatetag openvariable %}iframeUrl{% templatetag closevariable %}"
+    frameborder="0"
+    width="800"
+    height="600"
+    allowtransparency
+/&gt;&lt;/iframe&gt;
+</code>	
+</pre>
+
+<a href="/">Go back to a global view</a>
+<hr>
+<p>
+	This results in the below when put together
+</p>
+<h1>Global Order Stats</h1>
+            <iframe src="http://{{iframeUrl}}" 
+            		width="1200" 
+            		height="800" 
+            		frameborder="0">        			
+    		</iframe>
+{% endblock %}
+
+
