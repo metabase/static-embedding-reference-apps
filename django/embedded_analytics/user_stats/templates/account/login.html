@@ -5,7 +5,7 @@
         <h2>Sign in to view user analytics</h2>
         <form method="post" action="{% url 'account_login' %}" id="login">
             {% csrf_token %}
-            <input name="username" type="text" placeholder="Username (admin)" value="admin" />
+            <input name="login" type="text" placeholder="Username (admin)" value="admin" />
             <input name="password" type="password" placeholder="Password (admin)" value="admin" />
             {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
