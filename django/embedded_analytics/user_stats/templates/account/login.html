@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="auth">
+        <h2>Sign in to view user analytics</h2>
+        <form method="post" action="{% url 'account_login' %}" id="login">
+            {% csrf_token %}
+            <input name="username" type="text" placeholder="Username (admin)" value="admin" />
+            <input name="password" type="password" placeholder="Password (admin)" value="admin" />
+            <p>you can just hit login :)</p>
+            <button class="primary" type="submit">Login</button>
+        </form>
+    </div>
+{% endblock %}
