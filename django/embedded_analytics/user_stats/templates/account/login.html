@@ -7,6 +7,9 @@
             {% csrf_token %}
             <input name="username" type="text" placeholder="Username (admin)" value="admin" />
             <input name="password" type="password" placeholder="Password (admin)" value="admin" />
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
             <p>you can just hit login :)</p>
             <button class="primary" type="submit">Login</button>
         </form>
