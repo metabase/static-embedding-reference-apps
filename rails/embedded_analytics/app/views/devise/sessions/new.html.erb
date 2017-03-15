@@ -1,0 +1,19 @@
+<div class="auth">
+    <h2>Sign in</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div>
+        <%= f.email_field :email, autofocus: true, value: "admin@admin.com" %>
+      </div>
+
+      <div>
+        <%= f.password_field :password, autocomplete: "off", value: "adminadmin" %>
+      </div>
+
+      <p>You can just hit sign in :)</p>
+      <div class="actions">
+          <%= f.submit "Sign in", :class => "primary" %>
+      </div>
+    <% end %>
+</div>
+
