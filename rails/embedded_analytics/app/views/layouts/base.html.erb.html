@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,11 +13,6 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
     <style>
         * { box-sizing: border-box; }
         html,
@@ -162,19 +158,8 @@
     </style>
   </head>
   <body>
-
-  <ul class="hmenu">
-    <%= render 'devise/menu/registration_items' %>
-    <%= render 'devise/menu/login_items' %>
-    </ul>
-      
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-
-
-       
     <div class="container">
-       <%= yield %>
+      {% block content %}{% endblock %}
     </div>
   </body>
 </html>
