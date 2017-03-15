@@ -37,13 +37,17 @@ app.get("/", (req, res) => {
 app.post("/login", (req, res) => {
   // in a real application you'd validate a username and password here, of course
   req.session.userId = req.body.userId;
-  res.redirect("/");
+  res.redirect(301, `/${req.body.redirect}`)
 });
+
+app.get('/login', (req, res) => {
+  res.render("login", { redirectUrl: req.query.next })
+})
 
 app.get("/signed_chart/:id", (req, res) => {
   const userId = req.session.userId;
   if (userId == null) {
-    res.render("login");
+    res.redirect(301, `/login?next=signed_chart/${req.params.id}`);
   } else {
     const unsignedToken = {
       resource: { dashboard: DASHBOARD_ID },
@@ -60,7 +64,7 @@ app.get("/signed_chart/:id", (req, res) => {
 app.get("/signed_dashboard/:id", (req, res) => {
   const userId = req.session.userId;
   if (userId == null) {
-    res.render("login");
+    res.redirect(301, `/login?next=signed_dashboard/${req.params.id}`);
   } else {
     const unsignedToken = {
       resource: { dashboard: DASHBOARD_ID },
