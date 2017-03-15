@@ -1,0 +1,48 @@
+
+extends layout.pug
+
+block content
+    h1 Embedding charts with signed parameters
+
+    p This is an example of an embedded chart with a signed parameter. Signed parameters are question parameters that must be signed by the embedding application. 
+
+    p The parameter is "User ID". This parameter marked as "Locked". This means that the embedding application's server process must specify a value and sign the request. This prevents an end user of the application from changing the url and seeing other user's charts or dashboards. There is no reference to this ID in the embedded iframe, and it is kept a secret from the end user. 
+
+    p To embed this graph in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and it's signed parameters as below
+
+    pre.
+        payload = {
+            "resource": {"question": 6},
+            "params": {
+                "user_id": user_id
+            }
+        }
+
+        token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
+
+        iframeUrl = METABASE_SITE_URL + "/embed/question/" + token + "#bordered=true"
+        
+    p In the place you wish to embed the chart in your HTML, insert the below:	
+
+    pre.
+        &lt;iframe
+            src="http://{iframeUrl}"
+            frameborder="0"
+            width="800"
+            height="600"
+            allowtransparency
+        /&gt;&lt;/iframe&gt;
+
+    a(href="/") Go back to a global view
+    p
+        This results in the below when put together
+
+    h1 Orders for User: #{userId}</h1>
+
+    iframe(
+        src="http://{iframeUrl}"
+        frameborder="0"
+        width="800"
+        height="600"
+        allowtransparency)
+

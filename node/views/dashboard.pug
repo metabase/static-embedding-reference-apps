@@ -1,0 +1,53 @@
+extends layout.pug
+
+block content
+    h1 Embedding dashboards with signed parameters</h1>
+
+    p
+        This is an example of an embedded dashboard with signed parameters. Signed parameters are dashboard parameters that must be signed by the embedding application. This lets you do things like provide per-user dashboards. 
+
+    p
+        In this example, the user stats dashboard has two parameters. The first, "Category" is marked as "editable" in the embedding settings for the "User Stats". This means the widget is displayed in the dashboard below and the end user of you application can interact with that widget.
+
+    p
+        The second parameter is "User ID". This parameter marked as "Locked". This means that the embedding application's server process must specify a value and sign the request. This prevents an end user of the application from changing the url and seeing other user's charts or dashboards. There is no reference to this ID in the embedded iframe, and it is kept a secret from the end user. 
+
+    p
+        To embed this dasbhoard in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and it's signed parameters as below
+
+
+    pre.
+        payload = {
+            "resource": {"dashboard": 2},
+            "params": {
+                "id": user_id
+            }
+        }
+
+        token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
+
+        iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token + "#bordered=true"
+        
+    p In the place you wish to embed the chart in your HTML, insert the below:	
+
+    pre.
+        &lt;iframe
+            src="http://{iframeUrl}"
+            frameborder="0"
+            width="800"
+            height="600"
+            allowtransparency
+        /&gt;&lt;/iframe&gt;
+
+    a(href="/") Go back to a global view
+
+    p This results in the below when put together
+
+    h2 Stats for User: #{userId}
+
+    iframe(src="http://{{iframeUrl}}" 
+            width="1200" 
+            height="800" 
+            frameborder="0")
+
+

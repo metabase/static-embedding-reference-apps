@@ -31,11 +31,20 @@ app.use(session({ secret: "FIXME", resave: false, saveUninitialized: true }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
+    res.render("index");
+});
+
+app.post("/login", (req, res) => {
+  // in a real application you'd validate a username and password here, of course
+  req.session.userId = req.body.userId;
+  res.redirect("/");
+});
+
+app.get("/signed_chart/:id", (req, res) => {
   const userId = req.session.userId;
   if (userId == null) {
     res.render("login");
   } else {
-    // construct our unsigned JWT token payload
     const unsignedToken = {
       resource: { dashboard: DASHBOARD_ID },
       params: { user_id: userId }
@@ -44,16 +53,26 @@ app.get("/", (req, res) => {
     const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);
     // construct the URL of the iframe to be displayed
     const iframeUrl = `${MB_SITE_URL}/embed/dashboard/${signedToken}`;
-
-    res.render("index", { userId: userId, iframeUrl: iframeUrl });
+    res.render("chart", { userId: req.params.id, iframeUrl: iframeUrl });
   }
-});
+})
 
-app.post("/login", (req, res) => {
-  // in a real application you'd validate a username and password here, of course
-  req.session.userId = req.body.userId;
-  res.redirect("/");
-});
+app.get("/signed_dashboard/:id", (req, res) => {
+  const userId = req.session.userId;
+  if (userId == null) {
+    res.render("login");
+  } else {
+    const unsignedToken = {
+      resource: { dashboard: DASHBOARD_ID },
+      params: { user_id: userId }
+    };
+    // sign the JWT token with our secret key
+    const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);
+    // construct the URL of the iframe to be displayed
+    const iframeUrl = `${MB_SITE_URL}/embed/dashboard/${signedToken}`;
+    res.render("dashboard", { userId: req.params.id, iframeUrl: iframeUrl });
+  }
+})
 
 app.get("/logout", (req, res) => {
   delete req.session.userId;
