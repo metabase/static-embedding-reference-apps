@@ -1,6 +1,6 @@
 # README
 
-1. Install depnencies: `composer install`. The package `lcobucci/jwt` has already been added
+1. Install dependencies: `composer install`. The package `lcobucci/jwt` has already been added
 2. See the Example Code in `app/routes/web.php`
 3. See the Example View in `resources/views/welcome.blade.php`
 
