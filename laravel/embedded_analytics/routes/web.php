@@ -11,6 +11,26 @@
 |
 */
 
+use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
+
 Route::get('/', function () {
-    return view('welcome');
+
+    $metabaseSiteUrl = 'http://localhost:3000';
+    $metabaseSecretKey = 'YOUR_SECRET_KEY';
+
+    $signer = new Sha256();
+    $token = (new Builder())
+        ->set('resource', [
+            'dashboard' => 1
+        ])
+        ->set('params', [
+            'params' => []
+        ])
+        ->sign($signer, $metabaseSecretKey)
+        ->getToken();
+
+    $iframeUrl = "{$metabaseSiteUrl}/embed/dashboard/{$token}#bordered=true&titled=true";
+
+    return view('welcome', compact('iframeUrl'));
 });
