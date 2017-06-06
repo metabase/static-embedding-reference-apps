@@ -1,0 +1,23 @@
+﻿@model DotNet.Models.ViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>ViewModel</h4>
+	<hr />
+    <iframe
+    src="@Model.url/embed/question/@Model.token#bordered=true&titled=true"
+    frameborder="0"
+    width="1024"
+    height="600"
+    allowtransparency
+/>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
