@@ -161,65 +161,66 @@
 
         <div class="container">
 
+            <h1>Embedding charts with signed parameters</h1>
+            <p>
+                This is an example of an embedded chart with a signed parameter. Signed parameters are question parameters that must be signed by the embedding application.
+            </p>
+            <p>
+                The parameter is "User ID". This parameter marked as "Locked". This means that the embedding application's server process must specify a value and sign the request. This prevents an end user of the application from changing the url and seeing other user's charts or dashboards. There is no reference to this ID in the embedded iframe, and it is kept a secret from the end user.
+            </p>
 
-            <article>
-                <h1>Embedding <span class="text-brand">Metabase</span> in Laravel</h1>
+            <p>
+                To embed this graph in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and it's signed parameters as below
+            </p>
 
-                <p>By embedding Metabase, you can use Metabase charts and Dashboards within your application. You have two choices depending on the degree of security you need in your application.</p>
+<pre>
+// composer require lcobucci/jwt
+use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 
-                <nav>
-                    <a href="#public">Public embeds</a>
-                    <a href="#signed">Signed embeds</a>
-                </nav>
+$metabaseSiteUrl = METABASE_SITE_URL;
+$metabaseSecretKey = METABASE_SECRET_KEY;
 
-                <hr />
+$signer = new Sha256();
+$token = (new Builder())
+    ->set('resource', [
+        'question' => 6
+    ])
+    ->set('params', [
+        'user_id' => $userId
+    ])
+    ->sign($signer, $metabaseSecretKey)
+    ->getToken();
 
-                <section id="public">
-                    <h2>Public Embeds</h2>
-                    <p>
-                        One is to simply use the public link urls inside of an iframe. In this case, the same public dashboard you see via a <a href="http://localhost:3000/public/dashboard/be1e6baa-9b97-4534-8ac0-4a45b5bbf4e1">Public Dashboard</a> link, is embedded directly in your application. This can also be embedded in a blog, or really anywhere that you can insert HTML. It has a secure URL in that a user can only look at the contents of the dashboard being shared. An end user never has information they can use to modify the url and gain access to any other resources on your Metabase instance. That same dashboard can be seen embedded in this page below.
-                    </p>
+$iframeUrl = "{$metabaseSiteUrl}/embed/question/{$token}#bordered=true&titled=true";
+</pre>
+<p>
+    In the place you wish to embed the chart in your HTML, insert the below:
+</p>
 
-                    <iframe
-                       src="http://localhost:3000/public/dashboard/be1e6baa-9b97-4534-8ac0-4a45b5bbf4e1"
-                       frameborder="0"
-                       width="800"
-                       height="600"
-                       allowtransparency
-                   >
-                   </iframe>
+<pre>
+&lt;iframe
+    src="http://<?php echo htmlentities('{{ $iframeUrl }}') ?>"
+    frameborder="0"
+    width="800"
+    height="600"
+    allowtransparency
+/&gt;&lt;/iframe&gt;
+</pre>
 
-                    <p>
-                    Similarly, we can embed a <a href="http://localhost:3000/public/question/2b03b37a-52ec-4ea5-a628-2d1a967c55c8">single question's chart</a> in our application as below.
-                    </p>
+    <a href="/">Go back to a global view</a>
+    <p>
+        This results in the below when put together
+    </p>
+    <h1>Orders for User: {{ $userId }}</h1>
 
-                    <iframe
-                        src="http://localhost:3000/public/question/2b03b37a-52ec-4ea5-a628-2d1a967c55c8"
-                        frameborder="0"
-                        width="800"
-                        height="600"
-                        allowtransparency
-                    >
-                    </iframe>
-                </section>
-
-
-                <section id="signed">
-                    <h2>Signed Embedding</h2>
-                    <p>
-                    With signed embedding, all embedded charts and dashboards have to be signed using a secret key. This should be done on your server, and allows you to embed dashboards filtered down to a specific user, organization or account. For example, we can take the same dashboard above and embed it. Additionally, it is easy to provide a per-user dashboard like you will see if you follow this link and log in with user: "admin" and password "admin"
-                    </p>
-                    <a href="/signed_dashboard/2">An example of a specific User's dashboard</a>
-
-                    <p>If you want to just embed a single chart, you can do that too. See the below example, which embeds chart #1, limited to user #1.</p>
-                    <a href="/signed_chart/2">An example of a specific User's chart</a>
-
-                    <p>
-                        We can also embed signed dashboards that are not limited to a single user. The below is a dashboard that can only be displayed if the embedding application signs the url with our secret key and can only be used in that application.
-                    </p>
-                    <a href="/signed_public_dashboard">An example of a public signed dashboard</a>
-                </section>
-            </article>
+    <iframe
+        src="http://{{ $iframeUrl }}"
+        frameborder="0"
+        width="800"
+        height="600"
+        allowtransparency
+    />
 
         </div>
 
