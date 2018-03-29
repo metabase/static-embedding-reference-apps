@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
 
 // these should match the settings in your Metabase instance
-let MB_SITE_URL = "http://localhost:3000";
-let MB_EMBEDDING_SECRET_KEY = "230e14ec089b2d22dd984dcd057b14df93e91f814f6f2526f2d10336ea40bf26";
+let MB_SITE_URL = "localhost:3000";
+let MB_EMBEDDING_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958";
 
 let payload = {
   resource: { dashboard: 1 },
@@ -24,7 +24,7 @@ function checkAuth(req, res, next) {
 }
 
 // the dashboard ID of a dashboard that has a `user_id` parameter
-const DASHBOARD_ID = 1;
+const DASHBOARD_ID = 2;
 
 if (!MB_EMBEDDING_SECRET_KEY) {
   throw new Error("Please set MB_EMBEDDING_SECRET_KEY.");
@@ -69,7 +69,7 @@ app.get("/signed_chart/:id", checkAuth, (req, res) => {
     const userId = req.session.userId;
     const unsignedToken = {
         resource: { dashboard: DASHBOARD_ID },
-        params: { user_id: userId }
+        params: { person_id: userId }
     };
 
     // sign the JWT token with our secret key
@@ -83,7 +83,7 @@ app.get("/signed_dashboard/:id", checkAuth, (req, res) => {
     const userId = req.session.userId;
     const unsignedToken = {
         resource: { dashboard: DASHBOARD_ID },
-        params: { user_id: userId }
+        params: { id: userId }
     };
     // sign the JWT token with our secret key
     const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);

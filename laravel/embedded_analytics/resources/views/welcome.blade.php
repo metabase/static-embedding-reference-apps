@@ -177,11 +177,11 @@
                 <section id="public">
                     <h2>Public Embeds</h2>
                     <p>
-                        One is to simply use the public link urls inside of an iframe. In this case, the same public dashboard you see via a <a href="http://localhost:3000/public/dashboard/be1e6baa-9b97-4534-8ac0-4a45b5bbf4e1">Public Dashboard</a> link, is embedded directly in your application. This can also be embedded in a blog, or really anywhere that you can insert HTML. It has a secure URL in that a user can only look at the contents of the dashboard being shared. An end user never has information they can use to modify the url and gain access to any other resources on your Metabase instance. That same dashboard can be seen embedded in this page below.
+                        One is to simply use the public link urls inside of an iframe. In this case, the same public dashboard you see via a <a href="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40">Public Dashboard</a> link, is embedded directly in your application. This can also be embedded in a blog, or really anywhere that you can insert HTML. It has a secure URL in that a user can only look at the contents of the dashboard being shared. An end user never has information they can use to modify the url and gain access to any other resources on your Metabase instance. That same dashboard can be seen embedded in this page below.
                     </p>
 
                     <iframe
-                       src="http://localhost:3000/public/dashboard/be1e6baa-9b97-4534-8ac0-4a45b5bbf4e1"
+                       src="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40"
                        frameborder="0"
                        width="800"
                        height="600"
@@ -190,11 +190,11 @@
                    </iframe>
 
                     <p>
-                    Similarly, we can embed a <a href="http://localhost:3000/public/question/2b03b37a-52ec-4ea5-a628-2d1a967c55c8">single question's chart</a> in our application as below.
+                    Similarly, we can embed a <a href="http://localhost:3000/public/question/938a446c-da62-479a-a1bd-913cd29a77ef">single question's chart</a> in our application as below.
                     </p>
 
                     <iframe
-                        src="http://localhost:3000/public/question/2b03b37a-52ec-4ea5-a628-2d1a967c55c8"
+                        src="http://localhost:3000/public/question/938a446c-da62-479a-a1bd-913cd29a77ef"
                         frameborder="0"
                         width="800"
                         height="600"

@@ -191,6 +191,7 @@ $token = (new Builder())
         'dashboard' => 2
     ])
     ->set('params', [
+    'id' => $userId
     ])
     ->sign($signer, $metabaseSecretKey)
     ->getToken();
