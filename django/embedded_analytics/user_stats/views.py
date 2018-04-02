@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 
 METABASE_SITE_URL = "localhost:3000"
-METABASE_SECRET_KEY = "f8a86a48501150b3561e5cd3ff07865f6b400ecceca58882cdd4adfa07f2c488"
+METABASE_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958"
 
 
 
@@ -31,9 +31,9 @@ def signed_public_dashboard(request):
 @login_required
 def signed_chart(request, user_id):
     payload = {
-        "resource": {"question": 6},
+        "resource": {"question": 2},
         "params": {
-            "user_id": user_id
+            "person_id": user_id
         }
     }
 

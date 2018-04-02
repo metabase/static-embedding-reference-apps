@@ -14,3 +14,8 @@ For the Node application
 For the rails application
 `rails server -p 3001`
 (Note that we're binding to a nonstandard port as Metabase also runs on 3000)
+
+# Helpful info
+Admin login is
+user: plucky@admin.com
+password: Metabase123

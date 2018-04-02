@@ -1,8 +1,8 @@
 class StatsController < ApplicationController
   before_action :authenticate_user!
   
-  METABASE_SITE_URL = "http://localhost:3000"
-  METABASE_SECRET_KEY = "230e14ec089b2d22dd984dcd057b14df93e91f814f6f2526f2d10336ea40bf26"
+  METABASE_SITE_URL = "localhost:3000"
+  METABASE_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958"
   
   def index
   	payload = {
@@ -18,9 +18,9 @@ class StatsController < ApplicationController
 
   def signed_chart
   	payload = {
-	  :resource => {:question => 6},
+	  :resource => {:question => 2},
 	  :params => {
-	    "id" => current_user.id
+	    "person_id" => current_user.id
 	  }
 	}
 	token = JWT.encode payload, METABASE_SECRET_KEY

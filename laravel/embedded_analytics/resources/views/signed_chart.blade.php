@@ -184,10 +184,10 @@ $metabaseSecretKey = METABASE_SECRET_KEY;
 $signer = new Sha256();
 $token = (new Builder())
     ->set('resource', [
-        'question' => 6
+        'question' => 2
     ])
     ->set('params', [
-        'user_id' => $userId
+        'person_id' => $userId
     ])
     ->sign($signer, $metabaseSecretKey)
     ->getToken();

@@ -3,7 +3,7 @@
 set -eu
 
 METABASE_JAR="./metabase/metabase.jar"
-METABASE_VERSION=v0.23.0
+METABASE_VERSION=v0.28.3
 METABASE_URL="http://downloads.metabase.com/$METABASE_VERSION/metabase.jar"
 
 echo -n "-----> Downloading Metabase... "
