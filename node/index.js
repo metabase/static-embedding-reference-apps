@@ -9,11 +9,6 @@ const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
 let MB_SITE_URL = "http://localhost:3000";
 let MB_EMBEDDING_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958";
 
-let payload = {
-  resource: { dashboard: 1 },
-  params: {}
-};
-
 function checkAuth(req, res, next) {
     const userId = req.session.userId;
     if(userId) {
@@ -69,7 +64,8 @@ app.get("/signed_chart/:id", checkAuth, (req, res) => {
     const userId = req.session.userId;
     const unsignedToken = {
         resource: { question: 2 },
-        params: { person_id: userId }
+        params: { person_id: userId },
+        exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
     };
 
     // sign the JWT token with our secret key
