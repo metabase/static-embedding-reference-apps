@@ -79,7 +79,8 @@ app.get("/signed_dashboard/:id", checkAuth, (req, res) => {
     const userId = req.session.userId;
     const unsignedToken = {
         resource: { dashboard: DASHBOARD_ID },
-        params: { id: userId }
+        params: { id: userId },
+        exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
     };
     // sign the JWT token with our secret key
     const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);
