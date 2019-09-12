@@ -13,6 +13,7 @@
 
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Signer\Key;
 
 Route::get('/', function () {
 
@@ -21,14 +22,13 @@ Route::get('/', function () {
 
     $signer = new Sha256();
     $token = (new Builder())
-        ->set('resource', [
+        ->withClaim('resource', [
             'dashboard' => 1
         ])
-        ->set('params', [
+        ->withClaim('params', [
             'params' => []
         ])
-        ->sign($signer, $metabaseSecretKey)
-        ->getToken();
+        ->getToken($signer, new Key($metabaseSecretKey));
 
     $iframeUrl = "{$metabaseSiteUrl}/embed/dashboard/{$token}#bordered=true&titled=true";
 
@@ -43,13 +43,12 @@ Route::get('signed_dashboard/{userId}', function($userId) {
 
     $signer = new Sha256();
     $token = (new Builder())
-        ->set('resource', [
+        ->withClaim('resource', [
             'dashboard' => 2
         ])
-        ->set('params', [
+        ->withClaim('params', [
         ])
-        ->sign($signer, $metabaseSecretKey)
-        ->getToken();
+        ->getToken($signer, new Key($metabaseSecretKey));
 
     $iframeUrl = "{$metabaseSiteUrl}/embed/dashboard/{$token}#bordered=true";
 
@@ -63,14 +62,13 @@ Route::get('signed_chart/{userId}', function($userId) {
 
     $signer = new Sha256();
     $token = (new Builder())
-        ->set('resource', [
+        ->withClaim('resource', [
             'question' => 6
         ])
-        ->set('params', [
+        ->withClaim('params', [
             'user_id' => $userId
         ])
-        ->sign($signer, $metabaseSecretKey)
-        ->getToken();
+        ->getToken($signer, new Key($metabaseSecretKey));
 
     $iframeUrl = "{$metabaseSiteUrl}/embed/question/{$token}#bordered=true&titled=true";
 
@@ -85,13 +83,12 @@ Route::get('signed_public_dashboard', function() {
 
     $signer = new Sha256();
     $token = (new Builder())
-        ->set('resource', [
+        ->withClaim('resource', [
             'dashboard' => 1
         ])
-        ->set('params', [
+        ->withClaim('params', [
         ])
-        ->sign($signer, $metabaseSecretKey)
-        ->getToken();
+        ->getToken($signer, new Key($metabaseSecretKey));
 
     $iframeUrl = "{$metabaseSiteUrl}/embed/dashboard/{$token}#bordered=true&titled=true";
 
