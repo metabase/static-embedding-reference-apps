@@ -1,6 +1,6 @@
 # Django app
 
-This Django application demonstrates a Metabase dashboard embedded in a web application.
+This Django application demonstrates a simple, barebones Metabase dashboard embedded in a web application.
 
 ## Prerequisites
 
@@ -12,13 +12,19 @@ This Django application demonstrates a Metabase dashboard embedded in a web appl
 
 1. In a new terminal session, `cd` into [/embedded-analytics](/embedded-analytics).
 
-2. Run: 
+2. Install the application's dependencies:
+
+```shell
+pip install -r requirements.txt
+```
+
+3. Once the dependencies are installed, start the application by running: 
 
 ```shell
 ./manage.py runserver
 ```
 
-3. Open your browser to [localhost:3001](http://localhost:3001).
+4. Open your browser to [localhost:8000](http://localhost:8000).
 
 Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the repositories main [README](../README.md).
 

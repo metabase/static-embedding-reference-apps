@@ -1,10 +1,10 @@
 # Node application
 
-This Node application demonstrates a Metabase dashboard embedded in a web application.
+This Node application demonstrates a simple, barebones Metabase dashboard embedded in a web application.
 
 ## Prerequisites
 
-- You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [/metabase](../metabase) directory of this repository.
+- You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository.
 
 - **Node**. You'll need [Node](https://nodejs.org/en/) installed on your machine to run the application.
 
