@@ -17,7 +17,7 @@ payload = {
     }
 }
 
-token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
+token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256").decode('utf8')
 
 iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token + "#bordered=true"
 </pre>
