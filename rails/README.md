@@ -4,7 +4,7 @@ This Rails application demonstrates a Metabase dashboard embedded in a web appli
 
 ## Prerequisites
 
-- **Metabase**. You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [/metabase](../metabase) directory of this repository.
+- **Metabase**. You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository.
 
 - **Rails**. You'll need to have [Ruby on Rails installed](https://guides.rubyonrails.org/getting_started.html) on your machine.
 
@@ -17,7 +17,7 @@ This Rails application demonstrates a Metabase dashboard embedded in a web appli
 3. Once the application dependencies are installed, run:
 
 ```shell
-`rails server -p 3001`
+rails server -p 3001
 ```
 Because Metabase runs on port 3000, we need to include the `-p 3001` to bind the Rails server to a nonstandard port.
 

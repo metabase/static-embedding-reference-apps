@@ -8,6 +8,12 @@ Here's a simple Metabase dashboard in action:
 
 ![Simple Metabase dashboard embedded in Node application](/static/img/metabase_node_embed.gif)
 
+## Premium embedding
+
+Embedding Metabase charts will always be free; we just ask you to include the "Powered by Metabase" graphic when embedding charts.
+
+If you'd like to remove the "Powered by Metabase" graphic, check out our [Premium Embedding](https://store.metabase.com/product/embedding) option.
+
 ## Prerequisites
 
 - Java version 8.x or 11.x. [Install OpenJDK](https://openjdk.java.net/install/).
@@ -76,4 +82,4 @@ Credentials for the applications should auto-populate, but here they are for ref
 
 ## Run into trouble?
 
-Check out the [Metabase discussion forum](https://discourse.metabase.com/).
+Check out the [Metabase discussion forum](https://discourse.metabase.com/) and search for your issue.
