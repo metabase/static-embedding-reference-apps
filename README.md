@@ -12,7 +12,7 @@ Here's a simple Metabase dashboard in action:
 
 Embedding Metabase charts will always be free; we just ask you to include the "Powered by Metabase" graphic when embedding charts.
 
-If you'd like to remove the "Powered by Metabase" graphic, check out our [Premium Embedding](https://store.metabase.com/product/embedding) option.
+If you'd like to remove the "Powered by Metabase" graphic, check out our [Premium Embedding](https://store.metabase.com/product/embedding) options.
 
 ## Prerequisites
 
@@ -26,27 +26,29 @@ We'll first need to set up a running instance of Metabase to serve the embedded 
 
 2. Open up a terminal and clone this repo to your machine.
 
-3. `cd` into embedding-reference-apps
+3. `cd` into embedding-reference-apps.
 
 3. Run the the prepare script.
 
-```bash
+```shell
 ./prepare.sh
 ```
 
 The prepare.sh script downloads the latest version of Metabase to this repository's [metabase](/metabase) directory, changes into that directory, and runs the jar:`java -jar metabase.jar`.
 
-Metabase will log its progress in the terminal as the jar runs. Once you see the line, "Metabase Inititalization COMPLETE", open your browser to localhost:3000 to see that Metabase is up and running. 
+Metabase will log its progress in the terminal as the jar runs. Once you see the line, "Metabase Inititalization COMPLETE", open your browser to [localhost:3000](http://localhost:3000) to see that Metabase is up and running. 
 
 ## Running the apps
 
 To see an embedded Metabase dashboard in action, [set up Metabase](#set-up-metabase), and follow the instructions in the README for the relevant app. If you're not sure which one to try, check out the [Node app](/node/README.md).
 
-### [Node app](/node/README.md)
+- [Node](/node/README.md)
 
-### [Django app](/django/embedded-analytics/README.md)
+- [Django](/django/embedded-analytics/README.md)
 
-### [Rails app](/rails/embedded-analytics/README.md)
+- [Rails](/rails/embedded-analytics/README.md)
+
+- [Laravel](/laravel/embedded-analytics/README.md)
 
 ## Embedding charts or dashboards
 
@@ -75,11 +77,13 @@ Article links:
 - [Sharing and embedding dashboards or questions](https://www.metabase.com/docs/latest/administration-guide/12-public-links.html)
 
 ## Helpful info
-Credentials for the applications should auto-populate, but here they are for reference:
+Credentials for Metabase should auto-populate, but here they are for reference:
 
 - user: plucky@admin.com
 - password: Metabase123
 
 ## Run into trouble?
 
-Check out the [Metabase discussion forum](https://discourse.metabase.com/) and search for your issue.
+Check out the [Metabase discussion forum](https://discourse.metabase.com/) and search for your issue. If you don't find any answers, please [create an issue](https://github.com/metabase/embedding-reference-apps/issues/new/choose) for this repository.
+
+
