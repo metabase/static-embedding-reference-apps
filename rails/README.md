@@ -21,7 +21,7 @@ rails server -p 3001
 ```
 Because Metabase runs on port 3000, we need to include the `-p 3001` to bind the Rails server to a nonstandard port.
 
-4. Open your browser to [localhost:3001](localhost:3001).
+4. Open your browser to [localhost:3001](http://localhost:3001).
 
 Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the repositories main [README](../README.md).
 
