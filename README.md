@@ -40,7 +40,7 @@ Metabase will log its progress in the terminal as the jar runs. Once you see the
 
 ## Running the apps
 
-To see an embedded Metabase dashboard in action, follow the instructions in the README for the relevant app. If you're not sure which one to try, check out the [Node app](/node/README.md).
+To see an embedded Metabase dashboard in action, [set up Metabase](#set-up-metabase), and follow the instructions in the README for the relevant app. If you're not sure which one to try, check out the [Node app](/node/README.md).
 
 ### [Node app](/node/README.md)
 
