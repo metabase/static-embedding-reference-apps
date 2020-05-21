@@ -8,7 +8,7 @@ This Django application demonstrates a simple, barebones Metabase dashboard embe
 
 - **Django**. You'll need to have [Django installed](https://docs.djangoproject.com/en/3.0/topics/install/) on your machine.
 
-# Set up the Django application
+## Set up the Django application
 
 1. In a new terminal session, `cd` into [/embedded-analytics](/embedded-analytics).
 
@@ -26,5 +26,8 @@ pip install -r requirements.txt
 
 4. Open your browser to [localhost:8000](http://localhost:8000).
 
-Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the repositories main [README](../README.md).
+Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the parent repository's main [README](../../README.md).
 
+## Example embedding code
+
+You can find example code for embedding Metabase in [user_stats/views.py](user_stats/views.py).

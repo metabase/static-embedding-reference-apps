@@ -44,9 +44,9 @@ To see an embedded Metabase dashboard in action, [set up Metabase](#set-up-metab
 
 ### [Node app](/node/README.md)
 
-### [Django app](/django/README.md)
+### [Django app](/django/embedded-analytics/README.md)
 
-### [Rails app](/rails/README.md)
+### [Rails app](/rails/embedded-analytics/README.md)
 
 ## Embedding charts or dashboards
 

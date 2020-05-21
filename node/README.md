@@ -24,6 +24,12 @@ node index.js
 
 4. Open your browser to [localhost:3001](http://localhost:3001).
 
-Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the repositories main [README](../README.md).
+Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the parent repository's main [README](../README.md).
 
+## Example embedding code
+
+You can find example code for Metabase embeds for:
+
+- **Charts**. See [views/chart.pug](views/chart.pug).
+- **Dashboards**. See [views/dashboard.pug](views/dashboard.pug).
 
