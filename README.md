@@ -20,7 +20,7 @@ If you'd like to remove the "Powered by Metabase" graphic, check out our [Premiu
 
 ## Set up Metabase
 
-We'll first need to set up a running instance of Metabase to serve the embedded dashboards. If you already have an instance of Metabase running on your machine, shut it down.
+We'll first need to set up a running instance of Metabase to serve the embedded dashboards.
 
 1. If you already have an instance of Metabase running on your machine, shut it down. 
 
@@ -85,4 +85,3 @@ Credentials for Metabase should auto-populate, but here they are for reference:
 ## Run into trouble?
 
 Check out the [Metabase discussion forum](https://discourse.metabase.com/) and search for your issue. If you don't find any answers, please [create an issue](https://github.com/metabase/embedding-reference-apps/issues/new/choose) for this repository.
-
