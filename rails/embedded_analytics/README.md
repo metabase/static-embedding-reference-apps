@@ -4,9 +4,11 @@ This Rails application demonstrates a simple, barebones Metabase dashboard embed
 
 ## Prerequisites
 
-- **Metabase**. You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository.
+- **Metabase**. You should have already completed the setup detailed in the [README](../../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository.
 
-- **Rails**. You'll need to have [Ruby on Rails installed](https://guides.rubyonrails.org/getting_started.html) on your machine.
+- **Ruby**. You'll need to have [Ruby](https://www.ruby-lang.org/en/) installed on your machine.
+
+- **Bundler**. [Bundler][https://bundler.io/) will install the application's dependencies.
 
 # Set up the Rails application
 
