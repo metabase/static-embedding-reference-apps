@@ -10,7 +10,7 @@ Here's a simple Metabase dashboard in action:
 
 ## Premium embedding
 
-Embedding Metabase charts will always be free; we just ask you to include the "Powered by Metabase" graphic when embedding charts.
+Embedding Metabase charts will always be free, but we include a "Powered by Metabase" graphic when using the open source version.
 
 If you'd like to remove the "Powered by Metabase" graphic, check out our [Premium Embedding](https://store.metabase.com/product/embedding) options.
 
@@ -85,5 +85,4 @@ Credentials for Metabase should auto-populate, but here they are for reference:
 ## Run into trouble?
 
 Check out the [Metabase discussion forum](https://discourse.metabase.com/) and search for your issue. If you don't find any answers, please [create an issue](https://github.com/metabase/embedding-reference-apps/issues/new/choose) for this repository.
-
 
