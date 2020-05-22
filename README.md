@@ -60,7 +60,7 @@ The Public embedding method is to simply use the public URLs inside of an iframe
 
 ### Signed embeds
 
-With signed embedding, all embedded charts and dashboards have to be signed using a secret key. You should sign embedded charts and dashboards on your server, which allows you to embed dashboards accessible to specific organizations, accounts, or users.
+With signed embedding, all embedded charts and dashboards have to be signed using a secret key. This allows you to build dynamic dashboards with a parameter that can be be locked down on the client side.  You should sign embedded charts and dashboards on your server, which allows you to embed dashboards accessible to specific organizations, accounts, or users.
 
 The web applications go into more detail about embedding, and provide examples. Start up the [Node app](/node/README.md) and explore the app.
 
