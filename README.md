@@ -72,7 +72,7 @@ You can also learn more about embedding dashboards by reading [Metabase's docume
 
 Article links:
 
-- [Embedding Metabase in other applications](https://www.metabase.com/docs/latest/administration-guide/13-embedding.html)
+- [Embedding Metabase components in other applications](https://www.metabase.com/docs/latest/administration-guide/13-embedding.html)
 - [Embedding all of Metabase in your web app](https://www.metabase.com/docs/latest/enterprise-guide/full-app-embedding.html)
 - [Sharing and embedding dashboards or questions](https://www.metabase.com/docs/latest/administration-guide/12-public-links.html)
 
