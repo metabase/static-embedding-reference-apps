@@ -4,7 +4,7 @@ This Django application demonstrates a simple, barebones Metabase dashboard embe
 
 ## Prerequisites
 
-- **Metabase**. You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository.
+- **Metabase**. You should have already completed the setup detailed in the [README](../../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../../metabase) directory of this repository.
 
 - **Django**. You'll need to have [Django installed](https://docs.djangoproject.com/en/3.0/topics/install/) on your machine.
 
