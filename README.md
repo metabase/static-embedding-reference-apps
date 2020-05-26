@@ -1,6 +1,6 @@
 # Embedding Metabase dashboards: reference web apps
 
-This repo contains example applications for common web frameworks to demonstrate how [Metabase](https://www.metabase.com/) dashboards embed in web applications.
+This repo contains example applications for common web frameworks to demonstrate how [Metabase](https://www.metabase.com/) dashboards can be embedded in your application.
 
 This README will walk you through getting Metabase up and running, as well as a simple web app, to show you a live example of an embedded dashboard.
 
