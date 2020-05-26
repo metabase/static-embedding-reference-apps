@@ -8,7 +8,7 @@ This Rails application demonstrates a simple, barebones Metabase dashboard embed
 
 - **Ruby**. You'll need to have [Ruby](https://www.ruby-lang.org/en/) installed on your machine.
 
-- **Bundler**. [Bundler][https://bundler.io/) will install the application's dependencies.
+- **Bundler**. [Bundler](https://bundler.io/) will install the application's dependencies.
 
 # Set up the Rails application
 
