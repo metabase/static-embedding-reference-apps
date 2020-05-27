@@ -23,7 +23,7 @@ php composer.phar install
 2. Generate an application key. First, create a .env file by copying the example env file.
 
 ```shell
-cp env.example .env
+cp .env.example .env
 ```
 
 Then generate the key.

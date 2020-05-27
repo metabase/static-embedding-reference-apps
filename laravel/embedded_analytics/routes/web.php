@@ -17,7 +17,7 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
 Route::get('/', function () {
 
     $metabaseSiteUrl = 'http://localhost:3000';
-    $metabaseSecretKey = 'f8a86a48501150b3561e5cd3ff07865f6b400ecceca58882cdd4adfa07f2c488';
+    $metabaseSecretKey = 'a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958';
 
     $signer = new Sha256();
     $token = (new Builder())
@@ -25,7 +25,7 @@ Route::get('/', function () {
             'dashboard' => 1
         ])
         ->set('params', [
-            'params' => []
+            'params' => (object)[]
         ])
         ->sign($signer, $metabaseSecretKey)
         ->getToken();
@@ -39,7 +39,7 @@ Route::get('/', function () {
 Route::get('signed_dashboard/{userId}', function($userId) {
 
     $metabaseSiteUrl = 'localhost:3000';
-    $metabaseSecretKey = 'f8a86a48501150b3561e5cd3ff07865f6b400ecceca58882cdd4adfa07f2c488';
+    $metabaseSecretKey = 'a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958';
 
     $signer = new Sha256();
     $token = (new Builder())
@@ -47,6 +47,7 @@ Route::get('signed_dashboard/{userId}', function($userId) {
             'dashboard' => 2
         ])
         ->set('params', [
+            'id' => $userId
         ])
         ->sign($signer, $metabaseSecretKey)
         ->getToken();
@@ -59,15 +60,15 @@ Route::get('signed_dashboard/{userId}', function($userId) {
 Route::get('signed_chart/{userId}', function($userId) {
 
     $metabaseSiteUrl = 'localhost:3000';
-    $metabaseSecretKey = 'f8a86a48501150b3561e5cd3ff07865f6b400ecceca58882cdd4adfa07f2c488';
+    $metabaseSecretKey = 'a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958';
 
     $signer = new Sha256();
     $token = (new Builder())
         ->set('resource', [
-            'question' => 6
+            'question' => 2
         ])
         ->set('params', [
-            'user_id' => $userId
+            'person_id' => $userId
         ])
         ->sign($signer, $metabaseSecretKey)
         ->getToken();
@@ -81,15 +82,14 @@ Route::get('signed_chart/{userId}', function($userId) {
 Route::get('signed_public_dashboard', function() {
 
     $metabaseSiteUrl = 'localhost:3000';
-    $metabaseSecretKey = 'f8a86a48501150b3561e5cd3ff07865f6b400ecceca58882cdd4adfa07f2c488';
+    $metabaseSecretKey = 'a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958';
 
     $signer = new Sha256();
     $token = (new Builder())
         ->set('resource', [
             'dashboard' => 1
         ])
-        ->set('params', [
-        ])
+        ->set('params', (object)[])
         ->sign($signer, $metabaseSecretKey)
         ->getToken();
 
