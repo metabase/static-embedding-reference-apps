@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "body-parser": "^1.16.0",
-    "express": "^4.14.1",
-    "express-session": "^1.15.0",
-    "jsonwebtoken": "^7.2.1",
-    "pug": "^2.0.0-beta10"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pug": "^2.0.4"
   },
   "scripts": {
     "start": "node index.js"

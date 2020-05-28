@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 METABASE_SITE_URL = "localhost:3000"
 METABASE_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958"
 
-
+def get_token(payload):
+    return jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256").decode('utf8')
 
 def index(request):
     return render(request,
@@ -21,9 +22,7 @@ def signed_public_dashboard(request):
         }
     }
 
-    token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
-
-    iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token + "#bordered=true"
+    iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + get_token(payload) + "#bordered=true"
 
     return render(request,
                   'user_stats/signed_public_dashboard.html',
@@ -37,9 +36,7 @@ def signed_chart(request, user_id):
         }
     }
 
-    token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
-
-    iframeUrl = METABASE_SITE_URL + "/embed/question/" + token + "#bordered=true"
+    iframeUrl = METABASE_SITE_URL + "/embed/question/" + get_token(payload) + "#bordered=true"
 
     if request.user.is_superuser:
         # always show admins user stats
@@ -62,9 +59,7 @@ def signed_dashboard(request, user_id):
         }
     }
 
-    token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
-
-    iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token + "#bordered=true"
+    iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + get_token(payload) + "#bordered=true"
 
     if request.user.is_superuser:
         # always show admins user stats
