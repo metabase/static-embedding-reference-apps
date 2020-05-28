@@ -49,4 +49,3 @@ Explore the app to learn more about embedding Metabase charts and dashboards in 
 - **Code**. You can find example code for embedding Metabase in [routes/web.php](routes/web.php).
 
 - **View**. You can find an example view in [resources/views/welcome.blade.php](resources/views/welcome.blade.php).
-
