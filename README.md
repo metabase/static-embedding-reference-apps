@@ -12,7 +12,7 @@ Here's a simple Metabase dashboard in action:
 
 Embedding Metabase charts will always be free, but we include a "Powered by Metabase" graphic when using the open source version.
 
-If you'd like to remove the "Powered by Metabase" attribution, check out our [Enterprise Edition](https://www.metabase.com/enterprise/) which lets you do so so as well as white-label the application.
+If you'd like to remove the "Powered by Metabase" attribution, check out our [Enterprise Edition](https://www.metabase.com/enterprise/). With full app embedding, you can add dashboards, charts, or even the entire Metabase interface into your own app with a fully branded experience.
 
 ## Prerequisites
 
