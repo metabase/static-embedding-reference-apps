@@ -1,6 +1,5 @@
 const express = require("express");
 const session = require("express-session");
-const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 
 const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
@@ -32,7 +31,7 @@ const app = express();
 
 app.set("view engine", "pug");
 app.use(session({ secret: "FIXME", resave: false, saveUninitialized: true }));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => res.render("index"));
 

@@ -16,27 +16,19 @@ If you'd like to remove the "Powered by Metabase" attribution, check out our [En
 
 ## Prerequisites
 
-- Java version 8.x or 11.x. [Install OpenJDK](https://openjdk.java.net/install/).
+- Java version 11 + [Install OpenJDK](https://openjdk.java.net/install/).
 
 ## Set up Metabase
 
 We'll first need to set up a running instance of Metabase to serve the embedded dashboards.
 
-1. If you already have an instance of Metabase running on your machine, shut it down. 
+1. If you already have an instance of Metabase running on your machine, shut it down. Then download and run Metabase according to the guides in our [install section](https://www.metabase.com/docs/latest/operations-guide/installing-metabase.html)
 
 2. Open up a terminal and clone this repo to your machine.
 
 3. `cd` into embedding-reference-apps.
 
-3. Run the the prepare script.
-
-```shell
-./prepare.sh
-```
-
-The prepare.sh script downloads the latest version of Metabase to this repository's [metabase](/metabase) directory, changes into that directory, and runs the jar:`java -jar metabase.jar`.
-
-Metabase will log its progress in the terminal as the jar runs. Once you see the line, "Metabase Inititalization COMPLETE", open your browser to [localhost:3000](http://localhost:3000) to see that Metabase is up and running. 
+3. Run any example depending on the programming language you choose
 
 ## Running the apps
 
