@@ -91,15 +91,15 @@ app.get("/signed_dashboard/:id", checkAuth, (req, res) => {
 app.get("/signed_public_dashboard/", (req, res) => {
   const userId = req.session.userId;
   const unsignedToken = {
-      resource: { dashboard: DASHBOARD_ID },
-      params: { id: userId },
+      resource: { dashboard: 1 },
+      params: { },
       exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
   };
   // sign the JWT token with our secret key
   const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);
   // construct the URL of the iframe to be displayed
   const iframeUrl = `${MB_SITE_URL}/embed/dashboard/${signedToken}`;
-  res.render("dashboard", { userId: req.params.id, iframeUrl: iframeUrl });
+  res.render("public_dashboard", { iframeUrl: iframeUrl });
 })
 
 app.listen(PORT, () => {
