@@ -34,13 +34,13 @@ We'll first need to set up a running instance of Metabase to serve the embedded 
 
 To see an embedded Metabase dashboard in action, [set up Metabase](#set-up-metabase), and follow the instructions in the README for the relevant app. If you're not sure which one to try, check out the [Node app](/node/README.md).
 
-- [Node](/node/README.md)
+- [Node](/node/)
 
-- [Django](/django/embedded-analytics/README.md)
+- [Django](/django/embedded_analytics/)
 
-- [Rails](/rails/embedded-analytics/README.md)
+- [Rails](/rails/embedded_analytics/)
 
-- [Laravel](/laravel/embedded-analytics/README.md)
+- [Laravel](/laravel/embedded_analytics/)
 
 ## Embedding charts or dashboards
 
