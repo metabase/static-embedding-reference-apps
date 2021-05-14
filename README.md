@@ -28,7 +28,7 @@ We'll first need to set up a running instance of Metabase to serve the embedded 
 
 3. `cd` into embedding-reference-apps.
 
-3. Run any example depending on the programming language you choose
+3. Run any example depending on the programming language you choose.
 
 ## Running the apps
 
