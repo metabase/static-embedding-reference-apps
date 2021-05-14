@@ -4,7 +4,7 @@ This Node application demonstrates a simple, barebones Metabase dashboard embedd
 
 ## Prerequisites
 
-- **Metabase**. You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository.
+- **Metabase**. You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository. You have to also configure Metabase for [public sharing](https://www.metabase.com/docs/latest/administration-guide/12-public-links.html) or [embedding](https://www.metabase.com/docs/latest/administration-guide/13-embedding.html).
 
 - **Node**. You'll need [Node](https://nodejs.org/en/) installed on your machine to run the application.
 
@@ -16,13 +16,13 @@ This Node application demonstrates a simple, barebones Metabase dashboard embedd
 
 2. Run `yarn install` to install the application's dependencies.
 
-3. Once the application dependencies are installed, run:
+3. Once the application dependencies are installed, run `yarn start` or:
 
 ```shell
 node index.js
 ```
 
-4. Open your browser to [localhost:3001](http://localhost:3001).
+4. Open your browser to [localhost:3001](http://localhost:3001) (or the port where this application is running).
 
 Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the parent repository's main [README](../README.md).
 

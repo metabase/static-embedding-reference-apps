@@ -1,13 +1,12 @@
 const express = require("express");
 const session = require("express-session");
-const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 
 const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
 
 // these should match the settings in your Metabase instance
 let MB_SITE_URL = "http://localhost:3000";
-let MB_EMBEDDING_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958";
+let MB_EMBEDDING_SECRET_KEY = "c39fcfd02abd76b0ad200d1eada354f136c383638dcfc189253b9b8e0dd13e46";
 
 function checkAuth(req, res, next) {
     const userId = req.session.userId;
@@ -32,7 +31,7 @@ const app = express();
 
 app.set("view engine", "pug");
 app.use(session({ secret: "FIXME", resave: false, saveUninitialized: true }));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => res.render("index"));
 
@@ -87,6 +86,20 @@ app.get("/signed_dashboard/:id", checkAuth, (req, res) => {
     // construct the URL of the iframe to be displayed
     const iframeUrl = `${MB_SITE_URL}/embed/dashboard/${signedToken}`;
     res.render("dashboard", { userId: req.params.id, iframeUrl: iframeUrl });
+})
+
+app.get("/signed_public_dashboard/", (req, res) => {
+  const userId = req.session.userId;
+  const unsignedToken = {
+      resource: { dashboard: 1 },
+      params: { },
+      exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
+  };
+  // sign the JWT token with our secret key
+  const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);
+  // construct the URL of the iframe to be displayed
+  const iframeUrl = `${MB_SITE_URL}/embed/dashboard/${signedToken}`;
+  res.render("public_dashboard", { iframeUrl: iframeUrl });
 })
 
 app.listen(PORT, () => {
