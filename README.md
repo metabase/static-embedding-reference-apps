@@ -22,7 +22,7 @@ If you'd like to remove the "Powered by Metabase" attribution, check out our [En
 
 We'll first need to set up a running instance of Metabase to serve the embedded dashboards.
 
-1. If you already have an instance of Metabase running on your machine, shut it down. Then download and run Metabase according to the guides in our [install section](https://www.metabase.com/docs/latest/operations-guide/installing-metabase.html)
+1. If you already have an instance of Metabase running on your machine, shut it down. Then download and run Metabase according to the guides in our [install section](https://www.metabase.com/docs/latest/operations-guide/installing-metabase.html).
 
 2. Open up a terminal and clone this repo to your machine.
 
