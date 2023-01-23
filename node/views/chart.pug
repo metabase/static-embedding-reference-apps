@@ -8,7 +8,7 @@ block content
 
     p The parameter is "User ID". This parameter marked as "Locked". This means that the embedding application's server process must specify a value and sign the request. This prevents an end user of the application from changing the url and seeing other user's charts or dashboards. There is no reference to this ID in the embedded iframe, and it is kept a secret from the end user. 
 
-    p To embed this graph in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and it's signed parameters as below
+    p To embed this graph in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and its signed parameters as below
 
     pre.
         payload = {
@@ -22,7 +22,7 @@ block content
 
         iframeUrl = METABASE_SITE_URL + "/embed/question/" + token + "#bordered=true"
         
-    p In the place you wish to embed the chart in your HTML, insert the below:	
+    p In the place you want to embed the chart in your HTML, insert the below:	
 
     pre.
         &lt;iframe
@@ -34,8 +34,8 @@ block content
         /&gt;&lt;/iframe&gt;
 
     a(href="/") Go back to a global view
-    p
-        This results in the below when put together
+
+    p The above code results should give you:
 
     h1 Orders for User: #{userId}</h1>
 

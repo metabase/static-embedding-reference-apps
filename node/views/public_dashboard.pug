@@ -3,12 +3,9 @@ extends layout.pug
 block content
     h1 Signed dashboards without parameters</h1>
 
-    p
-        This is an example of a signed embedded dashboard. We haven't signed any parameters, but we have signed the resource id (in this case dashboard 1). This is means that only application with the signing key are allowed to embed a Metabase resource (vs the public link which can be copy/pasted and shared). Signed embeds can also be set to have an expiration time, which further improves security.
+    p This is an example of a signed embedded dashboard. We haven't signed any parameters, but we have signed the resource id (in this case dashboard 1). This means that only application with the signing key are allowed to embed a Metabase resource (vs the public link which can be copy/pasted and shared). Signed embeds can also be set to have an expiration time, which further improves security.
 
-    p
-        To embed this dasbhoard in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and it's signed parameters as below
-
+    p To embed this dasbhoard in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and its signed parameters as below.
 
     pre.
         payload = {
