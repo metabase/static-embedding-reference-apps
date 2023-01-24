@@ -4,7 +4,7 @@ block content
     div
         article
             h1 Embedding Metabase in a Node app
-            p By embedding Metabase, you can use Metabase charts and Dashboards within your application. You have two choices depending on the degree of security you need in your application.
+            p By embedding Metabase, you can use Metabase charts and Dashboards within your application. You can embed the entire Metabase application in your app (see our <a href='https://www.metabase.com/embedding-demo'> full-app embedding demo</a>). You can also embed standalone questions and dashboards in one of two ways, depending on the degree of security you need in your application:
             nav
                 a(href="#public") Public embedding
                 a(href="#signed") Signed embedding
@@ -13,7 +13,7 @@ block content
 
             section(id="public")
                 h2 Public Embeds
-                p One is to simply use the public link urls inside of an iframe. In this case, the same public dashboard you see via a <a href="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40">Public Dashboard</a> link, is embedded directly in your application. This can also be embedded in a blog, or really anywhere that you can insert HTML. It has a secure URL in that a user can only look at the contents of the dashboard being shared. An end user never has information they can use to modify the url and gain access to any other resources on your Metabase instance. That same dashboard can be seen embedded in this page below.
+                p You can use the public link URLs inside of an iframe. In this case, the same public dashboard you see via a <a href="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40">Public Dashboard</a> link, is embedded directly in your application, blog, or really anywhere that you can insert HTML. The iframe has a secure URL in that a user can only look at the contents of the dashboard being shared. An end user never has information they can use to modify the url and gain access to any other resources on your Metabase instance. That same dashboard can be seen embedded in this page below.
 
                 iframe(src="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40" frameborder="0" width="800" height="600" allowtransparency)
 

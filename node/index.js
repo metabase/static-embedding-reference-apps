@@ -6,7 +6,7 @@ const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
 
 // these should match the settings in your Metabase instance
 let MB_SITE_URL = "http://localhost:3000";
-let MB_EMBEDDING_SECRET_KEY = "c39fcfd02abd76b0ad200d1eada354f136c383638dcfc189253b9b8e0dd13e46";
+let MB_EMBEDDING_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958";
 
 function checkAuth(req, res, next) {
     const userId = req.session.userId;
