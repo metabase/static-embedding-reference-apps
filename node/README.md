@@ -4,7 +4,9 @@ This Node application demonstrates a simple, barebones Metabase dashboard embedd
 
 ## Prerequisites
 
-- **Metabase**. You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository. You have to also configure Metabase for [public sharing](https://www.metabase.com/docs/latest/administration-guide/12-public-links.html) or [embedding](https://www.metabase.com/docs/latest/administration-guide/13-embedding.html).
+- **Metabase**. [Install and run](../README.md#set-up-metabase) a fresh Metabase in the `metabase` directory of this repository.
+
+- **Enable embedding**. Make sure to [enable embedding](../README.md#enable-embedding) in your Metabase.
 
 - **Node**. You'll need [Node](https://nodejs.org/en/) installed on your machine to run the application.
 
@@ -26,10 +28,19 @@ node index.js
 
 Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the parent repository's main [README](../README.md).
 
+## Charts don't work
+
+1. Go to your Metabase at `localhost:3000`.
+2. Click on the **gear** icon > **Admin settings**.
+3. Click **Embedding > **Standalone embeds**.
+4. Check that the embedding secret key matches the embedding key in `index.js`. 
+5. If the keys don't match, copy the secret key from your **Admin settings** and replace the secret key in the `index.js` file.
+
+If that doesn't work, try cloning a fresh repo and running a new JAR file.
+
 ## Example embedding code
 
 You can find example code for Metabase embeds for:
 
 - **Charts**. See [views/chart.pug](views/chart.pug).
 - **Dashboards**. See [views/dashboard.pug](views/dashboard.pug).
-
