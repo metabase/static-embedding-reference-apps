@@ -4,7 +4,9 @@ This Node application demonstrates a simple, barebones Metabase dashboard embedd
 
 ## Prerequisites
 
-- **Metabase**. You should have already completed the setup detailed in the [README](../README.md) for this repository, which shows you how to get an instance of Metabase up and running in the [metabase](../metabase) directory of this repository. You have to also configure Metabase for [public sharing](https://www.metabase.com/docs/latest/administration-guide/12-public-links.html) or [embedding](https://www.metabase.com/docs/latest/administration-guide/13-embedding.html).
+- **Metabase**. [Install and run](../README.md#set-up-metabase) a fresh Metabase in the `metabase` directory of this repository.
+
+- **Enable embedding**. Make sure to [enable embedding](../README.md#enable-embedding) in your Metabase.
 
 - **Node**. You'll need [Node](https://nodejs.org/en/) installed on your machine to run the application.
 
