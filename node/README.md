@@ -28,10 +28,19 @@ node index.js
 
 Explore the app to learn more about embedding Metabase charts and dashboards in applications. You can also check out the links to more documentation in the parent repository's main [README](../README.md).
 
+## Charts don't work
+
+1. Go to your Metabase at `localhost:3000`.
+2. Click on the **gear** icon > **Admin settings**.
+3. Click **Embedding > **Standalone embeds**.
+4. Check that the embedding secret key matches the embedding key in `index.js`. 
+5. If the keys don't match, copy the secret key from your **Admin settings** and replace the secret key in the `index.js` file.
+
+If that doesn't work, try cloning a fresh repo and running a new JAR file.
+
 ## Example embedding code
 
 You can find example code for Metabase embeds for:
 
 - **Charts**. See [views/chart.pug](views/chart.pug).
 - **Dashboards**. See [views/dashboard.pug](views/dashboard.pug).
-

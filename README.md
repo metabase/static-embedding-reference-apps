@@ -25,23 +25,23 @@ We'll first need to set up a running instance of Metabase to serve the embedded 
 1. Shut down Metabase if you already have it running on your machine.
 2. Download the [JAR file for Metabase OSS](https://www.metabase.com/start/oss/jar).
 3. Open up a terminal and clone this repo to your machine.
-4. Move the `metabase.jar` file to the `metabase` directory of this repo.
-5. Run the JAR file:
+4. Move the `metabase.jar` file from your downloads to the `/embedding-reference-apps/metabase` directory.
+5. `cd` into `/embedding-reference-apps/metabase`.
+6. Run the JAR file:
     ```
     java -jar metabase.jar
     ```
-6. [Run any example](#running-the-apps) depending on the programming language you choose.
+7. [Run any example](#running-the-apps) depending on the programming language you choose.
 
 ## Enable embedding
 
 Once you've got Metabase running (on port 3000 by default):
 
-1. Go to `localhost:3000` in your browser.
+1. Go to [`localhost:3000`](localhost:3000) in your browser.
 2. Log into Metabase.
     - User: plucky@admin.com
     - Password: Metabase123
 3. Go to **Admin settings** > **Embedding** and click the toggle.
-4. Make sure the embedding key in the **Admin settings** matches the embedding key in `index.js`.
 
 ## Running the apps
 
@@ -57,7 +57,7 @@ To see an embedded Metabase dashboard in action, [set up Metabase](#set-up-metab
 
 ## Embedding charts or dashboards
 
-There are three ways to embed Metabase charts or dashboards in web applications.
+There are different ways to embed Metabase charts or dashboards in web applications.
 
 ### Public embeds
 
