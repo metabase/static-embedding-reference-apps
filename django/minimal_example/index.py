@@ -12,7 +12,7 @@
 import os
 import time
 
-from django.conf.urls import url
+from django.urls import re_path
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 
@@ -47,5 +47,5 @@ def home(request):
     
 
 urlpatterns = [
-    url(r'^$', home, name='homepage')
+    re_path(r'^$', home, name='homepage')
 ]
