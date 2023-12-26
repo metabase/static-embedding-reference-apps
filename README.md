@@ -18,9 +18,9 @@ Here's a simple Metabase dashboard in action:
 
 ![Simple Metabase dashboard embedded in Node application](/static/img/metabase_node_embed.gif)
 
-## Free Static embedding 
+## Static embedding 
 
-Embedding Metabase charts will always be free, but we include a "Powered by Metabase" graphic when using the open source version.
+Embedding Metabase charts will always be free, but we include a "Powered by Metabase" graphic when using the open source version or if you don't have a paid Metabase subscription.
 
 If you'd like to remove the "Powered by Metabase" attribution, check out our [paid plans](https://www.metabase.com/pricing/). In addition to removing the banner, you can also customize the font and hide the download buttons for questions. 
 
