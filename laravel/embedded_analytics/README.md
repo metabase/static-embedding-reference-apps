@@ -1,6 +1,6 @@
 # Laravel app
 
-This Laravel application demonstrates a simple, barebones Metabase dashboard embedded in a web application.
+This Laravel application demonstrates a simple, barebones Metabase dashboard embedded in a web application using static embedding.
 
 ## Prerequisites
 

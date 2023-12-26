@@ -1,6 +1,6 @@
 # Node application
 
-This Node application demonstrates a simple, barebones Metabase dashboard embedded in a web application.
+This Node application demonstrates a simple, barebones Metabase dashboard embedded in a web application using static embedding.
 
 ## Prerequisites
 
