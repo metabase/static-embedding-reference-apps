@@ -1,6 +1,6 @@
 # Rails app
 
-This Rails application demonstrates a simple, barebones Metabase dashboard embedded in a web application.
+This Rails application demonstrates a simple, barebones Metabase dashboard embedded in a web application using static embedding.
 
 ## Prerequisites
 

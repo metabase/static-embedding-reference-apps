@@ -1,6 +1,16 @@
-# Embedding Metabase dashboards: reference web apps
+# Metabase static embedding: reference web apps
 
-This repo contains example applications for common web frameworks to demonstrate how [Metabase](https://www.metabase.com/) dashboards can be embedded in your application.
+This repo contains example applications for common web frameworks to demonstrate how [Metabase](https://www.metabase.com/) dashboards can be embedded in your application using the **static embedding feature**.
+
+For interactive embedding, check out the following resources:
+* [Interactive embedding quick start](https://www.metabase.com/learn/customer-facing-analytics/interactive-embedding-quick-start)
+* [Sample repo for the quick start](https://github.com/metabase/metabase-nodejs-express-interactive-embedding-sample)
+* [Sample with React](https://github.com/metabase/sso-examples/tree/master/app-embed-example)
+
+If you are unsure about what embedding feature is best for you, check out our [live demos](https://www.metabase.com/embedding-demo).
+
+
+## About this repo
 
 This README will walk you through getting Metabase up and running, as well as a simple web app, to show you a live example of an embedded dashboard.
 
@@ -8,11 +18,13 @@ Here's a simple Metabase dashboard in action:
 
 ![Simple Metabase dashboard embedded in Node application](/static/img/metabase_node_embed.gif)
 
-## Premium embedding
+## Static embedding 
 
-Embedding Metabase charts will always be free, but we include a "Powered by Metabase" graphic when using the open source version.
+Embedding Metabase charts will always be free, but we include a "Powered by Metabase" graphic when using the open source version or if you don't have a paid Metabase subscription.
 
-If you'd like to remove the "Powered by Metabase" attribution, check out our [paid plans](https://www.metabase.com/pricing/). With [full-app embedding](#full-app-embedding), you can add dashboards, charts, or even the entire Metabase interface into your own app with a fully branded experience.
+If you'd like to remove the "Powered by Metabase" attribution, check out our [paid plans](https://www.metabase.com/pricing/). In addition to removing the banner, you can also customize the font and hide the download buttons for questions. 
+
+With [interactive embedding](#interactive-embedding), you can add dashboards, charts, or even the entire Metabase interface into your own app with a fully branded experience.
 
 ## Prerequisites
 
@@ -63,15 +75,15 @@ There are different ways to embed Metabase charts or dashboards in web applicati
 
 The [public embedding](https://www.metabase.com/docs/latest/questions/sharing/public-links#public-embeds) method is to simply use the public URLs inside of an iframe, or really anywhere you can insert HTML. The embedded dashboard has a secure URL, so a user can only look at the contents of the dashboard being shared. An end user never has information they can use to modify the URL and gain access to any other resources on your Metabase instance.
 
-### Signed embeds
+### Static embeds
 
-With [signed embedding](https://www.metabase.com/docs/latest/embedding/signed-embedding), all embedded charts and dashboards have to be signed using a secret key. This allows you to build dynamic dashboards with a [parameter that can be be locked down](https://www.metabase.com/docs/latest/embedding/signed-embedding-parameters#restricting-data-in-a-signed-embed) on the client side.  You should sign embedded charts and dashboards on your server, which allows you to embed dashboards accessible to specific organizations, accounts, or users.
+With [static embedding](https://www.metabase.com/docs/latest/embedding/static-embedding), embedded questions and dashboards are be signed using a secret key. This allows you to build dynamic dashboards with a [parameter that can be locked down](https://www.metabase.com/docs/latest/embedding/static-embedding-parameters#restricting-data-in-a-static-embed) on the client side.  You should sign embedded questions and dashboards on your server, which allows you to embed dashboards accessible to specific organizations, accounts, or users.
 
 The web applications go into more detail about embedding, and provide examples. Start up the [Node app](/node/README.md) and explore the app.
 
-### Full-app embedding
+### Interactive embedding
 
-Full-app embedding puts the entire Metabase app inside your app, so you can include the query builder in addition to your charts and dashboards. Full-app embedding isn't covered in this repo. Check out the [full-app embedding demo](https://embedding-demo.metabase.com/) instead.
+Interactive embedding puts the entire Metabase app inside your app, so you can include the query builder in addition to your charts and dashboards. Interactive embedding isn't covered in this repo. Check out the [interactive embedding demo](https://embedding-demo.metabase.com/) instead.
 
 ## Docs and articles
 
