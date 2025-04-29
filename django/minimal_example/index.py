@@ -12,7 +12,7 @@
 import os
 import time
 
-from django.conf.urls import url
+from django.urls import re_path
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 
@@ -37,15 +37,15 @@ def home(request):
         'exp': round(time.time()) + (60 * 10)
     }
     token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm='HS256')
-    iframeUrl = METABASE_SITE_URL + '/embed/question/' + token + '#bordered=true&titled=true'
+    iframe_url = METABASE_SITE_URL + '/embed/question/' + token + '#bordered=true&titled=true'
 
     html = render_to_string('index.html', {
         'title': 'Embedding Metabase',
-        'iframeUrl': iframeUrl
+        'iframe_url': iframe_url
     })
     return HttpResponse(html)
-    
+
 
 urlpatterns = [
-    url(r'^$', home, name='homepage')
+    re_path(r'^$', home, name='homepage')
 ]
