@@ -8,7 +8,7 @@ METABASE_SITE_URL = "localhost:3000"
 METABASE_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958"
 
 def get_token(payload):
-    return jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256").decode('utf8')
+    return jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
 
 def index(request):
     return render(request,
