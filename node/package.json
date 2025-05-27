@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.3",
-    "express-session": "^1.17.1",
-    "jsonwebtoken": "^9.0.0",
-    "pug": "^3.0.2"
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "pug": "^3.0.3"
   },
   "scripts": {
     "start": "node index.js"
