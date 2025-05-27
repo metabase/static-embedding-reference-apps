@@ -10,15 +10,13 @@ This Node application demonstrates a simple, barebones Metabase dashboard embedd
 
 - **Node**. You'll need [Node](https://nodejs.org/en/) installed on your machine to run the application.
 
-- **Yarn**. You'll need the [Yarn package manager](https://classic.yarnpkg.com/en/) to install the application's dependencies.
-
 ## Set up the Node application
 
 1. In a new terminal session, `cd` into this directory. 
 
-2. Run `yarn install` to install the application's dependencies.
+2. Run `npm install` to install the application's dependencies.
 
-3. Once the application dependencies are installed, run `yarn start` or:
+3. Once the application dependencies are installed, run `npm start` or:
 
 ```shell
 node index.js
