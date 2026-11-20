@@ -80,7 +80,6 @@ Once you've got Metabase running (on port 3000 by default):
 
 - **Customer overview** (dashboard 3): the dashboard that the apps embed. It's published as a guest embed, and shows data from the Sample Database's Invoices and Analytic Events tables.
 - **A Public Dashboard** (dashboard 1) and **Number of Orders** (question 1): items with public links. The apps' home pages show both as public embeds, and the [HTML example](/html/index.html) embeds the question.
-- **An Embedded Dashboard** (dashboard 2) and **Embeddable Number User Orders** (question 2): older items from when the apps used static embedding. The apps don't use them anymore.
 
 To see how a guest embed is set up, open the **Customer overview** dashboard, click the **Share** icon, and select **Embed**.
 
