@@ -46,7 +46,7 @@ There are also minimal, single-file examples, without a login or customers:
 
 Guest embeds are available on every Metabase plan. On the Open Source and Starter plans, guest embeds show a "Powered by Metabase" banner.
 
-To remove the banner, check out our [paid plans](https://www.metabase.com/pricing/). On Pro and Enterprise plans, you can also [customize the appearance](https://www.metabase.com/docs/latest/embedding/appearance) of your embeds and hide the download buttons.
+To remove the banner, upgrade to a [Pro or Enterprise plan](https://www.metabase.com/pricing/). On those plans, you can also [customize the colors and fonts](https://www.metabase.com/docs/latest/embedding/appearance) of your embeds and hide the download buttons. On the Open Source and Starter plans, you can pick a light or dark theme.
 
 ## Prerequisites
 
@@ -76,7 +76,7 @@ Once you've got Metabase running (on port 3000 by default):
     - User: plucky@admin.com
     - Password: Metabase123
 3. Click the **grid** icon in the upper right and select **Embedding hub**.
-4. Go to **Security** and check that **Enable embedding** is on.
+4. Go to **Security** and check that **Enable embedding** is on. On Pro and Enterprise plans, the toggle is called **Modular embedding**.
 
 ## What's in the demo Metabase
 

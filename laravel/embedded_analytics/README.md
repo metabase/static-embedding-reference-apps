@@ -79,7 +79,7 @@ The tests in [tests/Feature/DashboardEmbedTest.php](tests/Feature/DashboardEmbed
 
 ## Use your own Metabase
 
-1. In your Metabase, go to **Embedding hub > Security** and turn on **Enable embedding**. Copy the secret key for guest embeds.
+1. In your Metabase, go to **Embedding hub > Security** and turn on **Enable embedding** (called **Modular embedding** on Pro and Enterprise plans). Copy the secret key for guest embeds.
 2. Open your dashboard, click the **Share** icon, and select **Embed**. Under **Authentication**, select **Guest**.
 3. Under **Parameters**, set the filter that identifies the customer to **Locked**, then click **Publish**.
 4. Set your Metabase's settings in the `.env` file, then restart the app:
