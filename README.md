@@ -2,7 +2,7 @@
 
 This repo contains example applications for common web frameworks that show how to embed [Metabase](https://www.metabase.com/) dashboards in your application with [guest embeds](https://www.metabase.com/docs/latest/embedding/guest-embedding).
 
-With a guest embed, your server signs a token, and your page passes the token to a Metabase component like `<metabase-dashboard>`. People who view the embed don't need a Metabase account. To show each of your customers only its own data, your server locks a filter to the customer's ID in the token.
+With a guest embed, your server signs a token, and your page passes the token to a Metabase component like `<metabase-dashboard>`. People who view the embed don't need a Metabase account.
 
 If your customers need to explore data themselves, with drill-through, the query builder, or AI chat, check out [modular embedding with SSO](https://www.metabase.com/docs/latest/embedding/modular-embedding) or [full app embedding](https://www.metabase.com/docs/latest/embedding/full-app-embedding), and these resources:
 
@@ -18,13 +18,13 @@ If you're unsure which way to embed is best for you, check out our [live demos](
 
 This README walks you through getting Metabase up and running, as well as a simple web app, to show you a live example of an embedded dashboard.
 
-Here's a Metabase dashboard embedded in the Node app. The person who's signed in belongs to the customer Acme Corp, so the dashboard only shows Acme Corp's data:
+Here's a Metabase dashboard embedded in the Node app:
 
 ![Metabase dashboard embedded in the Node application as a guest embed](/static/img/metabase_node_embed.png)
 
 ## The apps
 
-Each app does the same thing in a different framework: it shows one dashboard as a guest embed, and locks the dashboard to the customer of the person who's signed in. For comparison, each app's home page also shows a [public embed](#public-embeds).
+Each app does the same thing in a different framework: it shows one dashboard as a guest embed, with a token that the app signs on the server. For comparison, each app's home page also shows a [public embed](#public-embeds).
 
 | App                                              | Where the embedding code is                                                                                              |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
@@ -35,9 +35,9 @@ Each app does the same thing in a different framework: it shows one dashboard as
 
 If you're not sure which one to try, check out the [Node app](/node/README.md).
 
-There are also minimal, single-file examples, without a login or customers:
+There are also minimal, single-file examples, without a login:
 
-- [Django](/django/minimal_example/index.py) and [Shiny](/shiny/minimal_example/app.R): a guest embed of the same dashboard, with the customer's ID set in the code.
+- [Django](/django/minimal_example/index.py) and [Shiny](/shiny/minimal_example/app.R): a guest embed of the same dashboard.
 - [HTML](/html/index.html): a [public embed](#public-embeds), which is a public link in an iframe, with no token.
 
 ## Guest embeds and the "Powered by Metabase" banner
@@ -78,7 +78,7 @@ Once you've got Metabase running (on port 3000 by default):
 
 ## What's in the demo Metabase
 
-- **Customer overview** (dashboard 3): the dashboard that the apps embed. It's published as a guest embed. Its **Customer ID** filter is **Locked**, so the value has to come from the signed token, and its **Date** filter is **Editable**, so people can change it. The filter is connected to the Account ID column of the Sample Database's Invoices and Analytic Events tables.
+- **Customer overview** (dashboard 3): the dashboard that the apps embed. It's published as a guest embed, and shows data from the Sample Database's Invoices and Analytic Events tables.
 - **A Public Dashboard** (dashboard 1) and **Number of Orders** (question 1): items with public links. The apps' home pages show both as public embeds, and the [HTML example](/html/index.html) embeds the question.
 - **An Embedded Dashboard** (dashboard 2) and **Embeddable Number User Orders** (question 2): older items from when the apps used static embedding. The apps don't use them anymore.
 
@@ -98,9 +98,9 @@ The [public embedding](https://www.metabase.com/docs/latest/embedding/public-lin
 
 ### Guest embeds
 
-With [guest embeds](https://www.metabase.com/docs/latest/embedding/guest-embedding), your server signs a token with a secret key that it shares with your Metabase. Metabase only loads the embed if the token is valid.
+With [guest embeds](https://www.metabase.com/docs/latest/embedding/guest-embedding), embedded questions and dashboards are signed using a secret key that your server shares with your Metabase. Metabase only loads the embed if the token is valid. This allows you to build dynamic dashboards with a [parameter that can be locked down](https://www.metabase.com/docs/latest/embedding/parameters#restrict-data-on-guest-embeds). You should sign the tokens on your server, which allows you to embed dashboards accessible to specific organizations, accounts, or users.
 
-To restrict the data in a guest embed, set a filter to [**Locked**](https://www.metabase.com/docs/latest/embedding/parameters#restrict-data-on-guest-embeds) and have your server put the value in the token. For example, the apps in this repo look up the customer of the signed-in user and lock the dashboard's Customer ID filter to that customer. You can lock a filter to anything your server knows about the viewer, like their organization, their account, or the user themselves. Metabase applies the filter before any data reaches the browser, and people can't change a locked value, because they don't have the secret key.
+The web applications go into more detail about embedding, and provide examples. Start up the [Node app](/node/README.md) and explore the app.
 
 ### Static embeds (deprecated)
 
