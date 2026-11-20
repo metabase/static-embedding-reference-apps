@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Metabase guest embeds - Laravel example</title>
+        <style>
+            * { box-sizing: border-box; }
+
+            body {
+                font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+                margin: 0;
+                color: #2E353B;
+            }
+
+            header,
+            main {
+                max-width: 80rem;
+                margin: 0 auto;
+                padding: 1rem 1.5rem;
+            }
+
+            header {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            header .spacer { flex: 1; }
+
+            h1 { font-size: 2rem; }
+
+            p {
+                font-size: 1.12rem;
+                line-height: 1.6rem;
+                max-width: 42rem;
+            }
+
+            a { color: #509ee3; }
+
+            code { font-size: 0.95em; }
+
+            table { border-collapse: collapse; }
+
+            th,
+            td {
+                text-align: left;
+                padding: 0.5rem 2rem 0.5rem 0;
+                border-bottom: 1px solid #DCE1E4;
+            }
+
+            input {
+                padding: 0.75rem;
+                border: 1px solid #DCE1E4;
+                border-radius: 4px;
+                font-size: 1rem;
+            }
+
+            button {
+                font: inherit;
+                border: 1px solid #DCE1E4;
+                background-color: #fff;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            button.primary {
+                border-color: #509ee3;
+                background-color: #509ee3;
+                color: #fff;
+            }
+
+            .text-brand { color: #509ee3; }
+
+            .auth {
+                max-width: 20rem;
+                margin: 4rem auto;
+            }
+
+            .auth input,
+            .auth button {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .error { color: #c0392b; }
+
+            iframe {
+                border: 1px solid #DCE1E4;
+                border-radius: 4px;
+                max-width: 100%;
+            }
+
+            /* The embed fills the element, so set the height you want here. */
+            metabase-dashboard { height: 800px; }
+        </style>
+        @stack('head')
+    </head>
+    <body>
+        <header>
+            <a href="{{ route('home') }}">Home</a>
+            <a href="{{ route('analytics') }}">Analytics</a>
+            <span class="spacer"></span>
+            @auth
+                <span>Signed in as <strong>{{ auth()->user()->email }}</strong></span>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Log out</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}">Log in</a>
+            @endauth
+        </header>
+        <main>
+            @yield('content')
+        </main>
+    </body>
+</html>

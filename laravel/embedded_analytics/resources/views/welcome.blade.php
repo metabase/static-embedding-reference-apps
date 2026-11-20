@@ -1,227 +1,54 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Embedding Metabase in Laravel</title>
+@extends('layouts.app')
 
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Assistant:400,700" rel="stylesheet"">
+@section('content')
+    <h1>Embedding <span class="text-brand">Metabase</span> in Laravel</h1>
 
-        <style type="text/css">
+    <p>
+        This app shows a Metabase dashboard as a
+        <a href="https://www.metabase.com/docs/latest/embedding/guest-embedding">guest embed</a>:
+        the page loads Metabase's <code>embed.js</code> and renders a
+        <code>&lt;metabase-dashboard&gt;</code> component with a token that this app signs on the server.
+        People who view the dashboard don't need a Metabase account.
+    </p>
 
-            * {
-                box-sizing: border-box;
-            }
+    <h2>Each customer sees only its own data</h2>
 
-            html,
-            body,
-           .container {
-                height: 100%;
-            }
+    <p>
+        The dashboard has a <strong>Customer ID</strong> filter that's set to <strong>Locked</strong> in Metabase.
+        When someone opens the dashboard, this app looks up the customer that the signed-in user belongs to and
+        signs that customer's ID into the token. Metabase applies the filter before any data reaches the browser,
+        and it rejects a value that doesn't come from a signed token.
+    </p>
 
-            body {
-                font-family: 'Assistant', Helvetica, sans-serif;
-                margin: 0;
-                padding: 1rem;
-            }
+    <p>Sign in as different people to see it work:</p>
 
-            @media screen and (min-width: 40em) {
-                padding-left: 10rem;
-                padding-top: 32rem;
-            }
+    <table>
+        <tr><th>Email</th><th>Password</th><th>Customer</th><th>Locked Customer ID</th></tr>
+        <tr><td><code>alice@example.com</code></td><td><code>password</code></td><td>Acme Corp</td><td>5</td></tr>
+        <tr><td><code>bob@example.com</code></td><td><code>password</code></td><td>Acme Corp</td><td>5</td></tr>
+        <tr><td><code>carol@example.com</code></td><td><code>password</code></td><td>Bluebird Labs</td><td>12</td></tr>
+    </table>
 
-            .container {
-                margin-left: auto;
-                margin-right: auto;
-            }
+    <p>
+        Alice and Bob work for the same customer, so they see the same data. Carol works for another customer,
+        so she sees different data.
+    </p>
 
-            @media screen and (min-width: 40em) {
-                .container {
-                    max-width: 80rem;
-                }
+    <p><a href="{{ route('analytics') }}">View the embedded dashboard</a></p>
 
-                article {
-                    padding-left: 10rem;
-                }
-            }
+    <h2>Public embeds</h2>
 
-            p {
-                font-size: 1.12rem;
-                max-width: 38.84rem;
-                line-height: 1.6rem;
-                color: #2E353B;
-            }
+    <p>
+        For comparison, here's a <a href="https://www.metabase.com/docs/latest/embedding/public-links#public-embeds">public embed</a>:
+        a public link to a dashboard in an iframe. A public embed doesn't use a token, so you can see it without signing in,
+        and so can anyone else with the link. Filters in a public link's URL don't restrict anything, because anyone can
+        change them. Use public embeds for data that everyone can see, and guest embeds when you need to restrict the data.
+    </p>
 
-            @media screen and (min-width: 40em) {
-                section {
-                    padding-top: 4rem;
-                    padding-bottom: 4rem;
-                }
-            }
+    <!-- These public links come from the demo Metabase in this repository. -->
+    <iframe src="{{ $metabaseSiteUrl }}/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40" width="800" height="600" title="A public dashboard"></iframe>
 
-            h1 {
-                font-size: 2em;
-            }
-            @media screen and (min-width: 40em) {
-                h1 {
-                    margin-top: 14rem;
-                }
-            }
+    <p>You can embed a single question the same way:</p>
 
-            @media screen and (min-width: 40em) {
-                nav {
-                   margin-top: 6rem;
-                   margin-bottom: 6rem;
-                }
-            }
-
-            nav a {
-                margin-right: 1rem;
-            }
-
-            iframe {
-                margin-top: 2rem;
-                margin-bottom: 2rem;
-            }
-
-            a {
-                cursor: pointer;
-                color: #509ee3;
-            }
-
-            hr {
-                border: none;
-                height: 1px;
-                background-color: #DCE1E4;
-                margin: 0;
-                max-width: 38.84rem;
-            }
-
-            input {
-                padding: 1rem;
-                border: 1px solid  #DCE1E4;
-                border-radius: 2px;
-            }
-
-            .auth {
-                text-align: center;
-                max-width: 20rem;
-                margin-left: auto;
-                margin-right: auto;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                height: 100%;
-            }
-
-            .auth input {
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-
-            .auth button {
-                width: 100%;
-            }
-
-            button {
-                font-family: 'Assistant', Helvetica, sans-serif;
-                border: 1px solid #DCE1E4;
-                background-color: #fff;
-                padding: 1rem;
-                border-radius: 2px;
-                font-size: 1rem;
-                line-height: 1;
-            }
-
-            button:hover {
-                cursor: pointer;
-            }
-
-            button.primary {
-                border-color: #509ee3;
-                background-color: #509ee3;
-                color: #fff;
-            }
-
-            .text-brand { color: #509ee3; }
-
-            pre {
-                max-width: 38.84rem;
-                border: 1px solid #DCE1E4;
-                border-radius: 2px;
-                padding: 2rem;
-                white-space: pre-wrap;
-            }
-
-        </style>
-
-    </head>
-    <body>
-
-        <div class="container">
-
-
-            <article>
-                <h1>Embedding <span class="text-brand">Metabase</span> in Laravel</h1>
-
-                <p>By embedding Metabase, you can use Metabase charts and Dashboards within your application. You have two choices depending on the degree of security you need in your application.</p>
-
-                <nav>
-                    <a href="#public">Public embeds</a>
-                    <a href="#signed">Signed embeds</a>
-                </nav>
-
-                <hr />
-
-                <section id="public">
-                    <h2>Public Embeds</h2>
-                    <p>
-                        One is to simply use the public link urls inside of an iframe. In this case, the same public dashboard you see via a <a href="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40">Public Dashboard</a> link, is embedded directly in your application. This can also be embedded in a blog, or really anywhere that you can insert HTML. It has a secure URL in that a user can only look at the contents of the dashboard being shared. An end user never has information they can use to modify the url and gain access to any other resources on your Metabase instance. That same dashboard can be seen embedded in this page below.
-                    </p>
-
-                    <iframe
-                       src="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40"
-                       frameborder="0"
-                       width="800"
-                       height="600"
-                       allowtransparency
-                   >
-                   </iframe>
-
-                    <p>
-                    Similarly, we can embed a <a href="http://localhost:3000/public/question/938a446c-da62-479a-a1bd-913cd29a77ef">single question's chart</a> in our application as below.
-                    </p>
-
-                    <iframe
-                        src="http://localhost:3000/public/question/938a446c-da62-479a-a1bd-913cd29a77ef"
-                        frameborder="0"
-                        width="800"
-                        height="600"
-                        allowtransparency
-                    >
-                    </iframe>
-                </section>
-
-
-                <section id="signed">
-                    <h2>Signed Embedding</h2>
-                    <p>
-                    With signed embedding, all embedded charts and dashboards have to be signed using a secret key. This should be done on your server, and allows you to embed dashboards filtered down to a specific user, organization or account. For example, we can take the same dashboard above and embed it. Additionally, it is easy to provide a per-user dashboard like you will see if you follow this link and log in with user: "admin" and password "admin"
-                    </p>
-                    <a href="/signed_dashboard/2">An example of a specific User's dashboard</a>
-
-                    <p>If you want to just embed a single chart, you can do that too. See the below example, which embeds chart #1, limited to user #1.</p>
-                    <a href="/signed_chart/2">An example of a specific User's chart</a>
-
-                    <p>
-                        We can also embed signed dashboards that are not limited to a single user. The below is a dashboard that can only be displayed if the embedding application signs the url with our secret key and can only be used in that application.
-                    </p>
-                    <a href="/signed_public_dashboard">An example of a public signed dashboard</a>
-                </section>
-            </article>
-
-        </div>
-
-    </body>
-</html>
+    <iframe src="{{ $metabaseSiteUrl }}/public/question/938a446c-da62-479a-a1bd-913cd29a77ef" width="800" height="400" title="A public question"></iframe>
+@endsection

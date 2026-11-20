@@ -1,3 +1,7 @@
 *.pyc
+__pycache__/
+.venv/
 .DS_Store
+metabase/*.jar
 metabase/plugins
+django/embedded_analytics/db.sqlite3

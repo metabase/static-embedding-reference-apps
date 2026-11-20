@@ -2,106 +2,141 @@ const express = require("express");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
 
-const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
+const PORT = parseInt(process.env.PORT || "3001");
 
-// these should match the settings in your Metabase instance
-let MB_SITE_URL = "http://localhost:3000";
-let MB_EMBEDDING_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958";
+// The URL people's browsers use to reach your Metabase.
+const METABASE_SITE_URL =
+  process.env.METABASE_SITE_URL || "http://localhost:3000";
 
-function checkAuth(req, res, next) {
-    const userId = req.session.userId;
-    if(userId) {
-        return next();
-    }
-    req.session.redirectTo = req.path;
-    return res.redirect('/login');
+// The embedding secret key, from Embedding hub > Security in your Metabase.
+// The default is the key of the demo Metabase in this repository. Keep your
+// own key on the server and out of version control.
+const METABASE_SECRET_KEY =
+  process.env.METABASE_SECRET_KEY ||
+  "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958";
+
+// The dashboard to embed. In the demo Metabase, dashboard 3 is "Customer
+// overview", published as a guest embed with its Customer ID filter locked.
+const METABASE_DASHBOARD_ID = parseInt(
+  process.env.METABASE_DASHBOARD_ID || "3",
+);
+
+// Demo customers and users. A real app would keep these in its database.
+// Each customer's ID matches an Account ID in Metabase's Sample Database.
+const CUSTOMERS = [
+  { id: 5, name: "Acme Corp" },
+  { id: 12, name: "Bluebird Labs" },
+];
+
+const USERS = [
+  { username: "alice", password: "password", customerId: 5 },
+  { username: "bob", password: "password", customerId: 5 },
+  { username: "carol", password: "password", customerId: 12 },
+];
+
+function findUser(username) {
+  return USERS.find((user) => user.username === username);
 }
 
-// the dashboard ID of a dashboard that has a `user_id` parameter
-const DASHBOARD_ID = 2;
+// Signs a guest embed token that locks the dashboard to one customer.
+//
+// The dashboard's Customer ID filter is set to "Locked" in Metabase, so
+// Metabase only accepts a value for it from a token signed with the embedding
+// secret key. Nothing in the browser can change or remove the value.
+function signDashboardToken(customer) {
+  const payload = {
+    resource: { dashboard: METABASE_DASHBOARD_ID },
+    params: {
+      // Keyed by the filter's slug. The value comes from the signed-in user's
+      // customer, never from the request. Always pass an ID: an empty list
+      // would turn the filter off and show every customer's rows.
+      customer_id: [customer.id],
+    },
+    exp: Math.floor(Date.now() / 1000) + 10 * 60, // 10 minute expiration
+  };
 
-if (!MB_EMBEDDING_SECRET_KEY) {
-  throw new Error("Please set MB_EMBEDDING_SECRET_KEY.");
-}
-if (typeof DASHBOARD_ID !== "number" || isNaN(DASHBOARD_ID)) {
-  throw new Error("Please set DASHBOARD_ID.");
+  return jwt.sign(payload, METABASE_SECRET_KEY);
 }
 
 const app = express();
 
 app.set("view engine", "pug");
-app.use(session({ secret: "FIXME", resave: false, saveUninitialized: true }));
+app.set("views", __dirname + "/views");
+// The default session store keeps sessions in memory, which is only for
+// development. Use a persistent store in production.
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "replace-this-secret",
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => res.render("index"));
+// Make the signed-in user available to the routes and the views.
+app.use((req, res, next) => {
+  req.user = findUser(req.session.username);
+  res.locals.user = req.user;
+  next();
+});
 
-// basic auth routes,
-// you should replace this with the auth scheme of your choice
-app.route("/login")
-    .get((req, res) => {
-      res.render("login")
-    })
-    .post((req, res) => {
-      const { username, password, redirect } = req.body;
-      if(username === 'admin' && password === 'admin') {
-          // set a user id for our 'admin' user. you'd do user lookup here
-          req.session.userId = 1;
-          res.redirect(req.session.redirectTo);
-      } else {
-          res.redirect('/login');
-      }
+function checkAuth(req, res, next) {
+  if (req.user) {
+    return next();
+  }
+  return res.redirect("/login");
+}
+
+// The home page shows a public embed, which needs the Metabase URL.
+app.get("/", (req, res) =>
+  res.render("index", { metabaseSiteUrl: METABASE_SITE_URL }),
+);
+
+// A basic login for the demo. Replace it with your app's own authentication.
+app
+  .route("/login")
+  .get((req, res) => res.render("login"))
+  .post((req, res) => {
+    const { username, password } = req.body;
+    const user = findUser(username);
+
+    if (!user || user.password !== password) {
+      return res.status(401).render("login", {
+        error: "That username and password didn't match. Try again.",
+      });
+    }
+
+    req.session.regenerate(() => {
+      req.session.username = user.username;
+      res.redirect("/analytics");
     });
+  });
 
-app.get("/logout", (req, res) => {
-    delete req.session.userId;
-    res.redirect("/");
+app.post("/logout", (req, res) => {
+  req.session.destroy(() => res.redirect("/"));
 });
 
-// authenticated routes
+app.get("/analytics", checkAuth, (req, res) => {
+  // Every user of one customer gets the same locked value, so they all see
+  // that customer's data.
+  const customer = CUSTOMERS.find(({ id }) => id === req.user.customerId);
 
-app.get("/signed_chart/:id", checkAuth, (req, res) => {
-    const userId = req.session.userId;
-    const unsignedToken = {
-        resource: { question: 2 },
-        params: { person_id: userId },
-        exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
-    };
-
-    // sign the JWT token with our secret key
-    const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);
-    // construct the URL of the iframe to be displayed
-    const iframeUrl = `${MB_SITE_URL}/embed/question/${signedToken}`;
-    res.render("chart", { userId: req.params.id, iframeUrl: iframeUrl });
-})
-
-app.get("/signed_dashboard/:id", checkAuth, (req, res) => {
-    const userId = req.session.userId;
-    const unsignedToken = {
-        resource: { dashboard: DASHBOARD_ID },
-        params: { id: userId },
-        exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
-    };
-    // sign the JWT token with our secret key
-    const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);
-    // construct the URL of the iframe to be displayed
-    const iframeUrl = `${MB_SITE_URL}/embed/dashboard/${signedToken}`;
-    res.render("dashboard", { userId: req.params.id, iframeUrl: iframeUrl });
-})
-
-app.get("/signed_public_dashboard/", (req, res) => {
-  const userId = req.session.userId;
-  const unsignedToken = {
-      resource: { dashboard: 1 },
-      params: { },
-      exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
-  };
-  // sign the JWT token with our secret key
-  const signedToken = jwt.sign(unsignedToken, MB_EMBEDDING_SECRET_KEY);
-  // construct the URL of the iframe to be displayed
-  const iframeUrl = `${MB_SITE_URL}/embed/dashboard/${signedToken}`;
-  res.render("public_dashboard", { iframeUrl: iframeUrl });
-})
-
-app.listen(PORT, () => {
-  console.log("Example app listening on port " + PORT + "!");
+  res.render("dashboard", {
+    customer,
+    metabaseSiteUrl: METABASE_SITE_URL,
+    token: signDashboardToken(customer),
+  });
 });
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log("Example app listening on port " + PORT + "!");
+  });
+}
+
+module.exports = {
+  app,
+  METABASE_SITE_URL,
+  METABASE_SECRET_KEY,
+  METABASE_DASHBOARD_ID,
+};

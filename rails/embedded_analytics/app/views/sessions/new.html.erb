@@ -1,0 +1,15 @@
+<div class="auth">
+  <h2>Sign in to view your analytics</h2>
+  <% if flash[:alert] %>
+    <p class="error"><%= flash[:alert] %></p>
+  <% end %>
+  <%= form_with url: login_path do |form| %>
+    <%= form.email_field :email, value: params[:email] || "alice@example.com", placeholder: "Email", autocomplete: "username" %>
+    <%= form.password_field :password, value: "password", placeholder: "Password", autocomplete: "current-password" %>
+    <%= form.button "Log in", type: :submit, class: "primary" %>
+  <% end %>
+  <p>
+    Demo users: <code>alice@example.com</code> and <code>bob@example.com</code> (Acme Corp), and
+    <code>carol@example.com</code> (Bluebird Labs). The password for each is <code>password</code>.
+  </p>
+</div>

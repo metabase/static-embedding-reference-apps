@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <!-- embed.js defines <metabase-dashboard> and the other Metabase components. -->
+    <script defer src="{{ metabase_site_url }}/app/embed.js"></script>
+    <script>
+        window.metabaseConfig = {
+            isGuest: true,
+            instanceUrl: "{{ metabase_site_url|escapejs }}",
+        };
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h1>Analytics for {{ customer.name }}</h1>
+
+    <p>
+        You're signed in as <strong>{{ user.username }}</strong>, who belongs to {{ customer.name }}.
+        The token for this embed locks the dashboard's Customer ID filter to <strong>{{ customer.id }}</strong>,
+        so every chart shows only {{ customer.name }}'s rows. The Date filter is editable, so you can change it.
+    </p>
+
+    <!-- The server signs a fresh token for each page load. -->
+    <metabase-dashboard token="{{ token }}" with-title="true"></metabase-dashboard>
+{% endblock %}

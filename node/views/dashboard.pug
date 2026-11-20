@@ -1,49 +1,22 @@
 extends layout.pug
 
+block head
+    // embed.js defines <metabase-dashboard> and the other Metabase components.
+    script(defer src=`${metabaseSiteUrl}/app/embed.js`)
+    // The Metabase URL goes in an attribute, so Pug escapes it.
+    script(data-instance-url=metabaseSiteUrl).
+        window.metabaseConfig = {
+            isGuest: true,
+            instanceUrl: document.currentScript.dataset.instanceUrl,
+        };
+
 block content
-    h1 Embedding dashboards with signed parameters</h1>
+    h1 Analytics for #{customer.name}
 
-    p Signed parameters are dashboard parameters that must be signed by the embedding application. Signed parameters lets you do things like provide per-user dashboards.
+    p.
+        You're signed in as #[strong= user.username], who belongs to #{customer.name}.
+        The token for this embed locks the dashboard's Customer ID filter to #[strong= customer.id],
+        so every chart shows only #{customer.name}'s rows. The Date filter is editable, so you can change it.
 
-    p In this example, the user stats dashboard has two parameters. The first, "Category" is marked as "editable" in the embedding settings for the "User Stats". This means the widget is displayed in the dashboard below and the end user of you application can interact with that widget.
-
-    p The second parameter is "User ID". This parameter marked as "Locked". This means that the embedding application's server process must specify a value and sign the request. This prevents an end user of the application from changing the url and seeing other user's charts or dashboards. There is no reference to this ID in the embedded iframe, and it is kept a secret from the end user. 
-
-    p To embed this dasbhoard in a webpage (as below), you'll need to generate a url on the server by signing a dictionary specifying the resource and its signed parameters as below
-
-
-    pre.
-        payload = {
-            "resource": {"dashboard": 2},
-            "params": {
-                "id": user_id
-            }
-        }
-
-        token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256")
-
-        iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token + "#bordered=true"
-        
-    p In the place you wish to embed the chart in your HTML, insert the below:	
-
-    pre.
-        &lt;iframe
-            src="{iframeUrl}"
-            frameborder="0"
-            width="800"
-            height="600"
-            allowtransparency
-        /&gt;&lt;/iframe&gt;
-
-    a(href="/") Go back to a global view
-
-    p This results in the below when put together
-
-    h2 Stats for User: #{userId}
-
-    iframe(src=iframeUrl
-            width="1200" 
-            height="800" 
-            frameborder="0")
-
-
+    // The server signs a fresh token for each page load.
+    metabase-dashboard(token=token with-title="true")

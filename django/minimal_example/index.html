@@ -2,14 +2,16 @@
 <html>
   <head>
     <title>{{ title }}</title>
+    <script defer src="{{ metabase_site_url }}/app/embed.js"></script>
+    <script>
+      window.metabaseConfig = {
+        isGuest: true,
+        instanceUrl: "{{ metabase_site_url|escapejs }}",
+      };
+    </script>
   </head>
   <body>
-    <h1>Embed {{ title }}</h1>
-    <iframe
-      src="{{iframeUrl}}"
-      frameborder="1"
-      width="800"
-      height="600"
-    ></iframe>
+    <h1>{{ title }}</h1>
+    <metabase-dashboard token="{{ token }}"></metabase-dashboard>
   </body>
 </html>

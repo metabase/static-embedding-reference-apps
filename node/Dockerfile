@@ -1,11 +1,17 @@
-FROM node:lts-alpine as builder
+FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY index.js package.json /app/
+ENV NODE_ENV=production
+ENV PORT=8080
+
+# Install the dependencies first, so Docker reuses this layer until they change.
+COPY package.json package-lock.json /app/
+RUN npm ci --omit=dev
+
+COPY index.js /app/
 COPY views /app/views
-RUN npm install
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+CMD [ "node", "index.js" ]
