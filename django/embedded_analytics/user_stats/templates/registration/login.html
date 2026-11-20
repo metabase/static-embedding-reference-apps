@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="auth">
+        <h2>Sign in to view your analytics</h2>
+        {% if form.errors %}
+            <p class="error">That username and password didn't match. Try again.</p>
+        {% endif %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input name="username" type="text" placeholder="Username" value="alice" autocomplete="username" />
+            <input name="password" type="password" placeholder="Password" value="password" autocomplete="current-password" />
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button class="primary" type="submit">Log in</button>
+        </form>
+        <p>
+            Demo users: <code>alice</code> and <code>bob</code> (Acme Corp), and
+            <code>carol</code> (Bluebird Labs). The password for each is <code>password</code>.
+        </p>
+    </div>
+{% endblock %}

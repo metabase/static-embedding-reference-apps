@@ -1,15 +1,89 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  margin: 0;
+  color: #2E353B;
+}
+
+header,
+main {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header .spacer { flex: 1; }
+
+h1 { font-size: 2rem; }
+
+p {
+  font-size: 1.12rem;
+  line-height: 1.6rem;
+  max-width: 42rem;
+}
+
+a { color: #509ee3; }
+
+code { font-size: 0.95em; }
+
+table { border-collapse: collapse; }
+
+th,
+td {
+  text-align: left;
+  padding: 0.5rem 2rem 0.5rem 0;
+  border-bottom: 1px solid #DCE1E4;
+}
+
+input {
+  padding: 0.75rem;
+  border: 1px solid #DCE1E4;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  font: inherit;
+  border: 1px solid #DCE1E4;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.primary {
+  border-color: #509ee3;
+  background-color: #509ee3;
+  color: #fff;
+}
+
+.text-brand { color: #509ee3; }
+
+.auth {
+  max-width: 20rem;
+  margin: 4rem auto;
+}
+
+.auth input,
+.auth button {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.error { color: #c0392b; }
+
+iframe {
+    border: 1px solid #DCE1E4;
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+/* The embed fills the element, so set the height you want here. */
+metabase-dashboard { height: 800px; }

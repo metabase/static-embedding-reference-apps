@@ -1,76 +1,59 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+import time
+
 import jwt
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import render
+
+from .models import Membership
 
 
-METABASE_SITE_URL = "localhost:3000"
-METABASE_SECRET_KEY = "a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958"
+def sign_dashboard_token(customer):
+    """Sign a guest embed token that locks the dashboard to one customer.
 
-def get_token(payload):
-    return jwt.encode(payload, METABASE_SECRET_KEY, algorithm="HS256").decode('utf8')
+    The dashboard's Customer ID filter is set to "Locked" in Metabase, so
+    Metabase only accepts a value for it from a token signed with the embedding
+    secret key. Nothing in the browser can change or remove the value.
+    """
+    payload = {
+        "resource": {"dashboard": settings.METABASE_DASHBOARD_ID},
+        "params": {
+            # Keyed by the filter's slug. The value comes from the signed-in
+            # user's customer, never from the request.
+            "customer_id": [customer.id],
+        },
+        "exp": int(time.time()) + 10 * 60,  # 10 minute expiration
+    }
+    return jwt.encode(payload, settings.METABASE_SECRET_KEY, algorithm="HS256")
+
 
 def index(request):
-    return render(request,
-                  'user_stats/index.html',
-                  {})
+    # The home page shows a public embed, which needs the Metabase URL.
+    return render(
+        request,
+        "user_stats/index.html",
+        {"metabase_site_url": settings.METABASE_SITE_URL},
+    )
 
-def signed_public_dashboard(request):
-    payload = {
-        "resource": {"dashboard": 1},
-        "params": {
-        }
-    }
-
-    iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + get_token(payload) + "#bordered=true"
-
-    return render(request,
-                  'user_stats/signed_public_dashboard.html',
-                  {'iframeUrl': iframeUrl})
-@login_required
-def signed_chart(request, user_id):
-    payload = {
-        "resource": {"question": 2},
-        "params": {
-            "person_id": user_id
-        }
-    }
-
-    iframeUrl = METABASE_SITE_URL + "/embed/question/" + get_token(payload) + "#bordered=true"
-
-    if request.user.is_superuser:
-        # always show admins user stats
-        return render(request,
-                      'user_stats/signed_chart.html',
-                      {'iframeUrl': iframeUrl})
-    elif request.user.id == user_id:
-        return render(request,
-                      'user_stats/signed_chart.html',
-                      {'iframeUrl': iframeUrl})
-    else:
-        return HttpResponse("You're not allowed to look at user %s." % user_id)
 
 @login_required
-def signed_dashboard(request, user_id):
-    payload = {
-        "resource": {"dashboard": 2},
-        "params": {
-            "id": user_id
-        }
-    }
+def dashboard(request):
+    # Every user of one customer gets the same locked value, so they all see
+    # that customer's data.
+    try:
+        customer = request.user.membership.customer
+    except Membership.DoesNotExist:
+        # Don't sign a token without a customer: an empty value would turn the
+        # filter off and show every customer's rows.
+        raise PermissionDenied("Your account isn't linked to a customer.")
 
-    iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + get_token(payload) + "#bordered=true"
-
-    if request.user.is_superuser:
-        # always show admins user stats
-        return render(request,
-                      'user_stats/signed_dashboard.html',
-                      {'iframeUrl': iframeUrl})
-    elif request.user.id == user_id:
-        return render(request,
-                      'user_stats/signed_dashboard.html',
-                      {'iframeUrl': iframeUrl})
-    else:
-        return HttpResponse("You're not allowed to look at user %s." % user_id)
-
-
+    return render(
+        request,
+        "user_stats/dashboard.html",
+        {
+            "customer": customer,
+            "metabase_site_url": settings.METABASE_SITE_URL,
+            "token": sign_dashboard_token(customer),
+        },
+    )

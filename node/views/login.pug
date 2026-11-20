@@ -1,11 +1,14 @@
 extends layout.pug
 
 block content
-    div(class="auth")
-        h2 Sign in
+    div.auth
+        h2 Sign in to view your analytics
+        if error
+            p.error= error
         form(method="POST" action="/login")
-              input(type="text" name="username" value="admin")
-              input(type="password" name="password" value="admin")
-              input(type="hidden" name="redirect" value=redirectUrl)
-              p You can just hit Login :)
-              button(type="submit" class="primary") Login
+            input(type="text" name="username" value="alice" placeholder="Username" autocomplete="username")
+            input(type="password" name="password" value="password" placeholder="Password" autocomplete="current-password")
+            button.primary(type="submit") Log in
+        p.
+            Demo users: #[code alice] and #[code bob] (Acme Corp), and
+            #[code carol] (Bluebird Labs). The password for each is #[code password].

@@ -1,23 +1,19 @@
-# A minimal example of a signed embedding in a Django application. Run this program with:
+# A minimal example of a Metabase guest embed in a Django application. Run this program with:
 #
 #    django-admin runserver --pythonpath=. --settings=index
 #
-# URLs are:
-# - http://localhost:8000/       : home page
+# and open http://localhost:8000 in your browser.
 #
-# You will need to modify the value of `METABASE_SECRET_KEY` to make this work.
-# Please see https://www.metabase.com/learn/developing-applications/advanced-metabase/embedding-charts-and-dashboards.html
-# for the full tutorial.
+# The values below match the demo Metabase in this repository. To embed from your own Metabase,
+# change `METABASE_SITE_URL`, `METABASE_SECRET_KEY`, and `METABASE_DASHBOARD_ID`.
+# Please see https://www.metabase.com/docs/latest/embedding/guest-embedding for the full docs.
 
 import os
 import time
 
-from django.conf.urls import url
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-
 import jwt
-
+from django.shortcuts import render
+from django.urls import path
 
 DEBUG = True
 SECRET_KEY = '4l0ngs3cr3tstr1ngw3lln0ts0l0ngw41tn0w1tsl0ng3n0ugh'
@@ -27,25 +23,30 @@ TEMPLATES = [{
     'DIRS': [os.getcwd()]
 }]
 
+METABASE_SITE_URL = 'http://localhost:3000'
+METABASE_SECRET_KEY = 'a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958'
+METABASE_DASHBOARD_ID = 3
+
+# In a real app, look up the customer of the signed-in user. Never take it from the request.
+CUSTOMER_ID = 5
+
 
 def home(request):
-    METABASE_SITE_URL = 'http://localhost:3000'
-    METABASE_SECRET_KEY = '40e0106db5156325d600c37a5e077f44a49be1db9d02c96271e7bd67cc9529fa'
     payload = {
-        'resource': {'question': 1},
-        'params': {},
-        'exp': round(time.time()) + (60 * 10)
+        'resource': {'dashboard': METABASE_DASHBOARD_ID},
+        # The dashboard's Customer ID filter is locked, so its value has to come from the token.
+        'params': {'customer_id': [CUSTOMER_ID]},
+        'exp': int(time.time()) + 10 * 60  # 10 minute expiration
     }
     token = jwt.encode(payload, METABASE_SECRET_KEY, algorithm='HS256')
-    iframeUrl = METABASE_SITE_URL + '/embed/question/' + token + '#bordered=true&titled=true'
 
-    html = render_to_string('index.html', {
+    return render(request, 'index.html', {
         'title': 'Embedding Metabase',
-        'iframeUrl': iframeUrl
+        'metabase_site_url': METABASE_SITE_URL,
+        'token': token
     })
-    return HttpResponse(html)
-    
+
 
 urlpatterns = [
-    url(r'^$', home, name='homepage')
+    path('', home)
 ]

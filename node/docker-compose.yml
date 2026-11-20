@@ -1,34 +1,24 @@
-version: '3.9'
 services:
   metabase:
-    image: metabase/metabase-enterprise:v1.45.2.1
-    container_name: metabase_signed_app_embedding_demo
-    hostname: metabase
+    image: metabase/metabase-enterprise:v1.65.6.2
     ports:
       - 3000:3000
-    environment: 
+    environment:
       - "MB_SITE_URL=http://localhost:3000"
-      - "MB_EMBEDDING_APP_ORIGIN=*"
-      - "MB_ENABLE_EMBEDDING=true"
+      - "MB_ENABLE_EMBEDDING_MODULAR=true"
       - "MB_EMBEDDING_SECRET_KEY=a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958"
       - "MB_ENABLE_PUBLIC_SHARING=true"
-    networks: 
-      - metanet1
+      - "JAVA_OPTS=-Xmx1g"
     volumes:
       - ../metabase:/metabase.db
     cpus: 1
-    mem_limit: 1024mb
-  node_signed_app_embedding_demo:
+    mem_limit: 2048mb
+  webapp:
     build: .
-    container_name: webapp_signed_app_embedding_demo
-    hostname: webapp
     ports:
       - 8080:8080
-    networks:
-      - metanet1
     environment:
-      - METABASE_URL=http://localhost:3000
-      - PORT=8080
-networks: 
-  metanet1:
-    driver: bridge
+      # The URL people's browsers use to reach Metabase.
+      - "METABASE_SITE_URL=http://localhost:3000"
+      # The same key as MB_EMBEDDING_SECRET_KEY above.
+      - "METABASE_SECRET_KEY=a1c0952f3ff361f1e7dd8433a0a50689a004317a198ecb0a67ba90c73c27a958"

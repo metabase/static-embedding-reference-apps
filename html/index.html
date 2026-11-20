@@ -1,23 +1,35 @@
+<!doctype html>
 <!--
-A simple example showing how to embed a question using an iframe.  This embed is not signed; please see:
+A minimal example of a public embed: a public link to a question in an iframe.
 
-    https://www.metabase.com/learn/developing-applications/advanced-metabase/embedding-charts-and-dashboards.html
+A public embed doesn't involve a signed token, so anyone with the link can see the data.
+To restrict data, use a guest embed instead. Please see:
 
-for the full tutorial.
+    https://www.metabase.com/docs/latest/embedding/public-links#public-embeds
 
-You will need to modify the `src` attribute of the iframe to match your Metabase installation.
+for the full docs.
+
+The `src` below is a public link from the demo Metabase in this repository. To embed from your
+own Metabase, change it to one of your public links.
+
+To try it, serve this directory with a web server, for example:
+
+    python3 -m http.server 8002
+
+and open http://localhost:8002 in your browser.
 -->
-<html>
+<html lang="en">
   <head>
-    <title>Metabase Embedding</title>
+    <meta charset="utf-8" />
+    <title>Metabase public embed</title>
   </head>
   <body>
-    <h1>Metabase Embedding</h1>
+    <h1>Metabase public embed</h1>
     <iframe
-      src="http://localhost:3000/public/question/7f0c3c4b-173e-452c-810f-ccb3fc4482a3"
-      frameborder="1"
+      src="http://localhost:3000/public/question/938a446c-da62-479a-a1bd-913cd29a77ef"
+      title="A public question"
       width="600"
       height="400"
-      ></iframe>
+    ></iframe>
   </body>
 </html>

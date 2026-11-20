@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get 'welcome/index'
-  get 'signed_chart/:id' => 'stats#signed_chart'
-  get 'signed_dashboard/:id' => 'stats#signed_dashboard'
-  get 'signed_public_dashboard' => 'stats#signed_public_dashboard'
-  root 'welcome#index'
+  root "welcome#index"
+
+  # The embedded Metabase dashboard. See app/controllers/analytics_controller.rb.
+  get "analytics", to: "analytics#show"
+
+  # A basic login for the demo. Replace it with your app's own authentication.
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
+
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  get "up" => "rails/health#show", as: :rails_health_check
 end
