@@ -4,8 +4,6 @@ This repo contains example applications for common web frameworks that show how 
 
 With a guest embed, your server signs a token, and your page passes the token to a Metabase component like `<metabase-dashboard>`. People who view the embed don't need a Metabase account. To show each of your customers only its own data, your server locks a filter to the customer's ID in the token.
 
-> Looking for static embedding? It's [deprecated in favor of guest embeds](https://www.metabase.com/docs/latest/embedding/introduction#static-embedding-is-deprecated). Guest embeds use the same secret key and the same signed token, but they render a web component instead of an iframe.
-
 If your customers need to explore data themselves, with drill-through, the query builder, or AI chat, check out [modular embedding with SSO](https://www.metabase.com/docs/latest/embedding/modular-embedding) or [full app embedding](https://www.metabase.com/docs/latest/embedding/full-app-embedding), and these resources:
 
 - [Modular embedding demo](https://embedded-analytics-sdk-demo.metabase.com)
