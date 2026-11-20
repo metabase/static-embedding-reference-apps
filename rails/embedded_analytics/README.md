@@ -12,6 +12,8 @@ For comparison, the app's home page also shows a [public embed](https://www.meta
 
 - **Metabase**. Complete the setup in this repository's main [README](../../README.md), which gets Metabase running at `localhost:3000` from the [metabase](../../metabase) directory.
 
+- **Embedding enabled**. The demo Metabase comes with embedding turned on. To make sure, [check that embedding is enabled](../../README.md#check-that-embedding-is-enabled).
+
 - **Ruby**. You'll need [Ruby](https://www.ruby-lang.org/en/) 3.2 or later. The app was last tested with the version in [.ruby-version](.ruby-version).
 
 - **Bundler**. [Bundler](https://bundler.io/) installs the application's dependencies.

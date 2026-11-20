@@ -12,6 +12,8 @@ For comparison, the app's home page also shows a [public embed](https://www.meta
 
 - **Metabase**. Complete the setup in this repository's main [README](../README.md#set-up-metabase), which gets Metabase running at `localhost:3000` from the `metabase` directory.
 
+- **Embedding enabled**. The demo Metabase comes with embedding turned on. To make sure, [check that embedding is enabled](../README.md#check-that-embedding-is-enabled).
+
 - **Node**. You'll need [Node](https://nodejs.org/en/) 20 or later, which includes npm.
 
 To run Metabase and the app in containers instead, see [Run with Docker](#run-with-docker).

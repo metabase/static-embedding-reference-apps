@@ -12,6 +12,8 @@ For comparison, the app's home page also shows a [public embed](https://www.meta
 
 - **Metabase**. Complete the setup in this repository's main [README](../../README.md), which gets Metabase running at `localhost:3000` from the [metabase](../../metabase) directory.
 
+- **Embedding enabled**. The demo Metabase comes with embedding turned on. To make sure, [check that embedding is enabled](../../README.md#check-that-embedding-is-enabled).
+
 - **PHP**. You'll need [PHP](https://www.php.net/) 8.3 or later, with the SQLite extension that PHP includes by default.
 
 - **Composer**. You'll need [Composer](https://getcomposer.org/) to manage PHP packages.
