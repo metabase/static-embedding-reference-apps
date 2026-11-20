@@ -6,13 +6,15 @@ With a guest embed, your server signs a token, and your page passes the token to
 
 > Looking for static embedding? It's [deprecated in favor of guest embeds](https://www.metabase.com/docs/latest/embedding/introduction#static-embedding-is-deprecated). Guest embeds use the same secret key and the same signed token, but they render a web component instead of an iframe.
 
-If your customers need to explore data themselves, with drill-through, the query builder, or AI chat, check out [modular embedding with SSO](https://www.metabase.com/docs/latest/embedding/modular-embedding) and these resources:
+If your customers need to explore data themselves, with drill-through, the query builder, or AI chat, check out [modular embedding with SSO](https://www.metabase.com/docs/latest/embedding/modular-embedding) or [full app embedding](https://www.metabase.com/docs/latest/embedding/full-app-embedding), and these resources:
 
 - [Modular embedding demo](https://embedded-analytics-sdk-demo.metabase.com)
 - [Modular embedding with SDK reference app](https://github.com/metabase/metabase-nodejs-react-sdk-embedding-sample)
+- [Full app embedding quickstart](https://www.metabase.com/docs/latest/embedding/full-app-embedding-quick-start-guide)
+- [Full app embedding demo](https://embedding-demo.metabase.com/)
 - [Full app embedding reference app](https://github.com/metabase/sso-examples/tree/master/app-embed-example)
 
-If you're unsure which way to embed is best for you, check out the [embedding introduction](https://www.metabase.com/docs/latest/embedding/introduction).
+If you're unsure which way to embed is best for you, check out our [live demos](https://www.metabase.com/embedding-demo) and the [embedding introduction](https://www.metabase.com/docs/latest/embedding/introduction).
 
 ## About this repo
 
@@ -94,13 +96,13 @@ There are different ways to embed Metabase charts or dashboards in web applicati
 
 ### Public embeds
 
-The [public embedding](https://www.metabase.com/docs/latest/embedding/public-links#public-embeds) method is to simply use the public URLs inside of an iframe, or really anywhere you can insert HTML. Public embeds don't involve any authentication, so anyone with the URL can view the data, and anyone can change the filters in the URL. Don't use public embeds to restrict data.
+The [public embedding](https://www.metabase.com/docs/latest/embedding/public-links#public-embeds) method is to simply use the public URLs inside of an iframe, or really anywhere you can insert HTML. A public link only opens that one question or dashboard, so people can't use it to get to anything else in your Metabase. But public embeds don't involve any authentication, so anyone with the URL can view the data, and anyone can change the filters in the URL. Don't use public embeds to restrict data.
 
 ### Guest embeds
 
 With [guest embeds](https://www.metabase.com/docs/latest/embedding/guest-embedding), your server signs a token with a secret key that it shares with your Metabase. Metabase only loads the embed if the token is valid.
 
-To restrict the data in a guest embed, set a filter to [**Locked**](https://www.metabase.com/docs/latest/embedding/parameters#restrict-data-on-guest-embeds) and have your server put the value in the token. For example, the apps in this repo look up the customer of the signed-in user and lock the dashboard's Customer ID filter to that customer. Metabase applies the filter before any data reaches the browser, and people can't change a locked value, because they don't have the secret key.
+To restrict the data in a guest embed, set a filter to [**Locked**](https://www.metabase.com/docs/latest/embedding/parameters#restrict-data-on-guest-embeds) and have your server put the value in the token. For example, the apps in this repo look up the customer of the signed-in user and lock the dashboard's Customer ID filter to that customer. You can lock a filter to anything your server knows about the viewer, like their organization, their account, or the user themselves. Metabase applies the filter before any data reaches the browser, and people can't change a locked value, because they don't have the secret key.
 
 ### Static embeds (deprecated)
 
